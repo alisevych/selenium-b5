@@ -11,7 +11,6 @@ public class BasePage extends WebInit {
 
     public void open(){
         driver.navigate().to(url);
-        driverWait.until(titleIs(title));
     }
 
 }
