@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 public class WebInit {
 
-    public WebDriver driver;
-    public WebDriverWait driverWait;
+    public static WebDriver driver;
+    public static WebDriverWait driverWait;
     public static final int timeout = 10;
 
     @Before

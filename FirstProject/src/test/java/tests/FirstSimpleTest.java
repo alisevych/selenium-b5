@@ -15,4 +15,17 @@ public class FirstSimpleTest extends WebInit {
         driverWait.until(titleIs("webdriver - Поиск в Google"));
     }
 
+    @Test
+    public void googleSimpleClicksTest() {
+        driver.navigate().to("http://www.google.com");
+        String word = "webdriver";
+        driver.findElement(By.name("q")).sendKeys(word + Keys.ENTER);
+        driver.findElement(By.className("MiYK0e")).click();
+        driver.findElement(By.name("q")).sendKeys(Keys.END);
+        driver.findElement(By.id("K32")).click();
+        driver.findElement(By.className("MiYK0e")).click();
+        driver.findElement(By.name("q")).sendKeys(word + Keys.ENTER);
+        driverWait.until(titleIs(word + " " + word + " - Поиск в Google"));
+    }
+
 }
