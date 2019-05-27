@@ -1,5 +1,6 @@
 package tests;
 
+import helpers.InputHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,14 @@ public class WebInit {
 
     @Before
     public void start() {
-        driver = new ChromeDriver();
+        String browserName = new InputHelper().getPropertyValue("driver");
+        if (browserName.equals(CHROME_NAME))
+            driver = new ChromeDriver();
+        if (browserName.equals(IE_NAME))
+            driver = new InternetExplorerDriver();
+        if (browserName.equals(FIREFOX_NAME))
+            driver = new FirefoxDriver();
+
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         driverWait = new WebDriverWait(driver, timeout);
     }
