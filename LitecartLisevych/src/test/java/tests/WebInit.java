@@ -18,7 +18,7 @@ public class WebInit {
     public static final int timeout = 10;
 
     public static final String CHROME_NAME = "chrome";
-    public static final String IE_NAME = "IE";
+    public static final String IE_NAME = "IExplorer";
     public static final String FIREFOX_NAME = "firefox";
 
     @Before
