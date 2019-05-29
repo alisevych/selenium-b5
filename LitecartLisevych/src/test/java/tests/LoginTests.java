@@ -6,8 +6,8 @@ import static site.LitecartSite.*;
 
 public class LoginTests extends WebInit {
 
-    private static final String ADMIN_USERNAME = "admin";
-    private static final String ADMIN_PASSWORD = "admin";
+    public static final String ADMIN_USERNAME = "admin";
+    public static final String ADMIN_PASSWORD = "admin";
 
     @Test
     public void loginAsAdminTest() {
