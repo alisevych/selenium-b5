@@ -3,11 +3,9 @@ package tests;
 import helpers.InputHelper;
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,24 +18,31 @@ import java.util.concurrent.TimeUnit;
 
 public class WebInit {
 
-    public static WebDriver driver;
-    public static WebDriverWait driverWait;
-    public static final int timeout = 10;
+    private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
+    protected WebDriver driver;
+    protected WebDriverWait driverWait;
+    protected static final int timeout = 10;
 
-    public static final String CHROME_NAME = "chrome";
-    public static final String IE_NAME = "IExplorer";
-    public static final String FIREFOX_NAME = "firefox";
-    public static final String FIREFOX_OLD_NAME = "firefoxOld";
-    public static final String FIREFOX_NIGHTLY_NAME = "firefoxNightly";
+    private static final String CHROME_NAME = "chrome";
+    private static final String IE_NAME = "IExplorer";
+    private static final String FIREFOX_NAME = "firefox";
+    private static final String FIREFOX_OLD_NAME = "firefoxOld";
+    private static final String FIREFOX_NIGHTLY_NAME = "firefoxNightly";
 
     @Before
     public void start() {
+        /* For parallel run 1 driver for 1 thread */
+        if (tlDriver.get() != null) {
+            driver = tlDriver.get();
+            driverWait = new WebDriverWait(driver, timeout);
+            return;
+        }
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("unexpectedAlertBehaviour", "dismiss");
         String browserName = new InputHelper().getPropertyValue("driver");
         if (browserName.equals(CHROME_NAME)) {
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("start-fullscreen");
+            chromeOptions.addArguments("start-maximized");
             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
             driver = new ChromeDriver(capabilities);
         }
@@ -61,12 +66,18 @@ public class WebInit {
         //System.out.println("[AL] Capabilities::\n" + ((HasCapabilities) driver).getCapabilities());
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         driverWait = new WebDriverWait(driver, timeout);
+
+        /* for parallel run*/
+        tlDriver.set(driver);
+        Runtime.getRuntime().addShutdownHook(
+                new Thread(() -> { driver.quit(); driver = null; }));
     }
 
     @After
     public void close() {
+        /* for non-parallel runs
         driver.quit();
-        driver = null;
+        driver = null; */
     }
 
 }

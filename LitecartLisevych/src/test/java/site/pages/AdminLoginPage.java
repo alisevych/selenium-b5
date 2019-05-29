@@ -11,6 +11,7 @@ public class AdminLoginPage extends BasePage {
     public AdminLoginPage(){
         url = "http://localhost/litecart/admin/";
         title = "Lisevych Software";
+        start(); // need to initialize driver and driverWait
     }
 
     public void loginAsAdmin(String username, String password){
