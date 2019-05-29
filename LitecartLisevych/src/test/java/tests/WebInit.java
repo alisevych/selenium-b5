@@ -58,7 +58,7 @@ public class WebInit {
             ffOptions.setBinary(new FirefoxBinary(new File("c:\\Program Files\\Mozilla Firefox\\Nightly\\firefox.exe")));
             driver = new FirefoxDriver(ffOptions);
         }
-        System.out.println("[AL] Capabilities::\n" + ((HasCapabilities) driver).getCapabilities());
+        //System.out.println("[AL] Capabilities::\n" + ((HasCapabilities) driver).getCapabilities());
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         driverWait = new WebDriverWait(driver, timeout);
     }

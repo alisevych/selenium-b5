@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -32,12 +33,17 @@ public class FirstSimpleTest extends WebInit {
 
     @Test
     public void addCookieTest(){
+        String COOKIE_NAME = "test";
+        int ZERO_ARRAY_SIZE = 0;
         driver.navigate().to("http://www.google.com");
-        //driver.manage().addCookie(new Cookie("test", "test"));
-        Cookie testCookie = driver.manage().getCookieNamed("test");
+        driver.manage().addCookie(new Cookie(COOKIE_NAME, COOKIE_NAME));
+        Cookie testCookie = driver.manage().getCookieNamed(COOKIE_NAME);
         Set<Cookie> cookies = driver.manage().getCookies();
-        driver.manage().deleteCookieNamed("test");
-        //driver.manage().deleteAllCookies();
+        Assert.assertTrue(driver.manage().getCookies().toString().contains(COOKIE_NAME));
+        driver.manage().deleteCookieNamed(COOKIE_NAME);
+        Assert.assertFalse(driver.manage().getCookies().toString().contains(COOKIE_NAME));
+        driver.manage().deleteAllCookies();
+        Assert.assertEquals(driver.manage().getCookies().size(), ZERO_ARRAY_SIZE);
     }
 
 }
