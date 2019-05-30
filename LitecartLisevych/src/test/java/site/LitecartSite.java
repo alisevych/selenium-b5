@@ -1,9 +1,10 @@
 package site;
 
-import site.pages.AdminLoginPage;
+import site.pages.AdminPage;
 
 public class LitecartSite {
 
-    public static AdminLoginPage adminLoginPage = new AdminLoginPage();
+    /* Admin pages */
+    public static AdminPage adminPage = new AdminPage();
 
 }
