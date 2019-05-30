@@ -15,7 +15,7 @@ public class AdminTests extends WebInit {
         adminPage.open();
         adminPage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
         int START_INDEX = 0;
-        int counter = 0;
+        int counter = START_INDEX;
         int iCore = START_INDEX;
         for (iCore = START_INDEX ; iCore < adminPage.numberOfCoreLinks; iCore++) {
             adminPage.clickCoreLinkByNumber(iCore);
