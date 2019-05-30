@@ -18,9 +18,8 @@ import java.util.concurrent.TimeUnit;
 
 public class WebInit {
 
-    private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
-    protected WebDriver driver;
-    protected WebDriverWait driverWait;
+    protected static WebDriver driver;
+    protected static WebDriverWait driverWait;
     protected static final int timeout = 10;
 
     private static final String CHROME_NAME = "chrome";
@@ -31,12 +30,6 @@ public class WebInit {
 
     @Before
     public void start() {
-        /* For parallel run 1 driver for 1 thread */
-        if (tlDriver.get() != null) {
-            driver = tlDriver.get();
-            driverWait = new WebDriverWait(driver, timeout);
-            return;
-        }
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("unexpectedAlertBehaviour", "dismiss");
         String browserName = new InputHelper().getPropertyValue("driver");
@@ -66,18 +59,12 @@ public class WebInit {
         //System.out.println("[AL] Capabilities::\n" + ((HasCapabilities) driver).getCapabilities());
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         driverWait = new WebDriverWait(driver, timeout);
-
-        /* for parallel run*/
-        tlDriver.set(driver);
-        Runtime.getRuntime().addShutdownHook(
-                new Thread(() -> { driver.quit(); driver = null; }));
     }
 
     @After
     public void close() {
-        /* for non-parallel runs
         driver.quit();
-        driver = null; */
+        driver = null;
     }
 
 }
