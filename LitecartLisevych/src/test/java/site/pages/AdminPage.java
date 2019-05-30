@@ -1,5 +1,6 @@
 package site.pages;
 
+import helpers.ElementHelper;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,10 +15,12 @@ public class AdminPage extends BasePage {
     public static final String PASSWORD_INPUT_NAME = "password";
     public static final String LOGIN_BUTTON_NAME = "login";
     /* Apps Menu */
+    public static final String APPS_MENU_CSS = "ul#box-apps-menu";
     public static final String APPS_MENU_XPATH = "//ul[@id='box-apps-menu']";
     public static final String LINK_XPATH = "./li/a";
     public static final String SUBLINK_XPATH = "./li//li/a";
-    public int numberOfCoreLinks = 0;
+    public int numberOfCoreLinks = -1;
+    public int numberOfDisplayedSublinks = -1;
 
     public static final String PAGE_HEADER_CSS = "h1";
 
@@ -30,58 +33,49 @@ public class AdminPage extends BasePage {
         driver.findElement(By.name(USERNAME_INPUT_NAME)).sendKeys(username);
         driver.findElement(By.name(PASSWORD_INPUT_NAME)).sendKeys(password);
         driver.findElement(By.name(LOGIN_BUTTON_NAME)).click();
+        getCoreLinks(); // initializing numberOfCoreLInks;
     }
 
     public WebElement getAppsMenu() {
-        //List<WebElement> elements = driver.findElements(By.cssSelector(APPS_MENU_CSS));
-        List<WebElement> elements = driver.findElements(By.xpath(APPS_MENU_XPATH));
+        List<WebElement> elements = driver.findElements(By.cssSelector(APPS_MENU_CSS));
+        //List<WebElement> elements = driver.findElements(By.xpath(APPS_MENU_XPATH));
         return getElementFromListAndCheckItIsUnique(elements);
     }
 
-    public WebElement getCoreLinkByNumber(int number) {
+    public List<WebElement> getCoreLinks() {
         WebElement appsMenu = getAppsMenu();
         List<WebElement> linksFound = appsMenu.findElements(By.xpath(LINK_XPATH));
+        if (numberOfCoreLinks == -1)
+            numberOfCoreLinks = linksFound.size(); // initialize
         if (numberOfCoreLinks != linksFound.size())
             throw new RuntimeException ( "[AUT_ERROR] Number of core links changed. Was : " +
                     numberOfCoreLinks + ", and now: " + linksFound.size() );
-        return linksFound.get(number);
+        return linksFound;
     }
 
-    public WebElement getSublinksByNumber(int number){
+    public List<WebElement> getSublinks() {
         WebElement appsMenu = getAppsMenu();
         List<WebElement> sublinksFound = appsMenu.findElements(By.xpath(SUBLINK_XPATH));
-        if (sublinksFound.size() == number + 1)
-            return sublinksFound.get(number);
-        else
-            return null;
+        numberOfDisplayedSublinks = sublinksFound.size();
+        return sublinksFound;
+    }
+
+    public void clickCoreLinkByNumber(int number) {
+        WebElement coreLink = getCoreLinks().get(number);
+        System.out.println("[AUT] Core Link: " + coreLink.getText());
+        coreLink.click();
+        getSublinks(); // initialize number of sublinks displayed
+    }
+
+    public void clickSublinkByNumber(int number){
+        WebElement sublink = getSublinks().get(number);
+        System.out.println("[AUT] Sublink: " + sublink.getText());
+        sublink.click();
     }
 
     public boolean isHeaderPresent(){
-        List<WebElement> headersFound = driver.findElements(By.cssSelector(PAGE_HEADER_CSS));
-        WebElement header = getElementFromListAndCheckItIsUnique(headersFound);
-        System.out.println("[AUT] Header is found.");
-        return header.isDisplayed();
-    }
-
-    public void clickAllCoreLinks() {
-        WebElement appsMenu = getAppsMenu();
-        List<WebElement> linksFound = appsMenu.findElements(By.xpath(LINK_XPATH));
-        numberOfCoreLinks = linksFound.size();
-        for (int i=0; i < numberOfCoreLinks; i++) {
-            WebElement nextLink = getCoreLinkByNumber(i);
-            nextLink.click();
-            isHeaderPresent();
-            /* go through sublinks */
-            int j = 0;
-            WebElement nextSublink = getSublinksByNumber(j);
-            while (nextSublink != null){
-                nextSublink.click();
-                Assert.assertTrue(isHeaderPresent());
-                j++;
-                nextSublink = getSublinksByNumber(j);
-                if (j > 100)
-                    throw new RuntimeException ( "[AUT_ERROR] Number of sublinks is > 100 : " + j);
-            }
-        }
+        WebElement headerFound = ElementHelper.getElementWhenPresent(driverWait, By.cssSelector(PAGE_HEADER_CSS)) ;
+        //System.out.println("[AUT] Header: " + headerFound.getText());
+        return headerFound.isDisplayed();
     }
 }
