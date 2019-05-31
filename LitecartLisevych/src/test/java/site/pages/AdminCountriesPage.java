@@ -10,10 +10,10 @@ public class AdminCountriesPage extends BasePage {
 
     /* Locators */
     public static final String COUNTRIES_TABLE_CSS = "table.dataTable";
-    public static final String HEADERS_CSS = "tr.header > th";
-    public static final String NAME_TEXT = "Name";
-    public static final int NAMES_INDEX = 5;
-    public static final String COUNTRIES_NAMES_CSS = "tr.row > td:nth-child(" + NAMES_INDEX + ")";
+    public static final String NAME_HEADER_TEXT = "Name";
+    public static final String ZONES_HEADER_TEXT = "Zones";
+
+    WebElement countriesTable;
 
     public AdminCountriesPage() {
         url = "http://localhost/litecart/admin/?app=countries&doc=countries";
@@ -21,19 +21,17 @@ public class AdminCountriesPage extends BasePage {
     }
 
     public WebElement getCountriesTable(){
-        List<WebElement> elements = driver.findElements(By.cssSelector(COUNTRIES_TABLE_CSS));
-        return getElementFromListAndCheckItIsUnique(elements);
+        return getElementWhenPresent(driverWait, By.cssSelector(COUNTRIES_TABLE_CSS));
     }
 
-    public List<WebElement> getTableHeaders(WebElement table){
-        return table.findElements(By.cssSelector(HEADERS_CSS));
+    public List<WebElement> getCountryNames(){
+        countriesTable = getCountriesTable();
+        return getTableColumnWithHeader(countriesTable, NAME_HEADER_TEXT);
     }
 
-    public List<WebElement> getCountries(){
-        WebElement countriesTable = getCountriesTable();
-        List<WebElement> headers = getTableHeaders(countriesTable);
-        verifyElementInListText(headers, NAMES_INDEX - 1 , NAME_TEXT); // index in list -1
-        return countriesTable.findElements(By.cssSelector(COUNTRIES_NAMES_CSS));
+    public List<WebElement> getCountryZones(){
+        countriesTable = getCountriesTable();
+        return getTableColumnWithHeader(countriesTable, ZONES_HEADER_TEXT);
     }
 
 }
