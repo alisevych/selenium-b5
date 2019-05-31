@@ -1,5 +1,6 @@
 package helpers;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,4 +29,9 @@ public class ElementHelper {
     public static WebElement getElementWhenPresent (WebDriverWait wait, By locator) {
         return wait.until(presenceOfElementLocated(locator));
     }
+
+    public static void verifyElementInListText(List<WebElement> list, int index, String text){
+        Assert.assertEquals(list.get(index).getText(), text);
+    }
+
 }

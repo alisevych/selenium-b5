@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import static helpers.ElementHelper.*;
 
-public class AdminPage extends BasePage {
+public class AdminHomePage extends BasePage {
 
     /* Login Form */
     public static final String USERNAME_INPUT_NAME = "username";
@@ -24,7 +24,7 @@ public class AdminPage extends BasePage {
 
     public static final String PAGE_HEADER_CSS = "h1";
 
-    public AdminPage() {
+    public AdminHomePage() {
         url = "http://localhost/litecart/admin/";
         title = "Lisevych Software";
     }
