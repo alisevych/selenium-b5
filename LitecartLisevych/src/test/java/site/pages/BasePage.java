@@ -5,8 +5,8 @@ import tests.WebInit;
 
 public class BasePage extends WebInit {
 
-    public static String url = "";
-    public static String title = "";
+    public String url = "";
+    public String title = "";
 
     BasePage(){
         start();
