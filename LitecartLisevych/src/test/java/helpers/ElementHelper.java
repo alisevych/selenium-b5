@@ -13,6 +13,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 public class ElementHelper {
 
     public static final String HEADERS_CSS = "tr.header > th";
+    public static final String TABLE_CELLS_CSS = "tr > td";
 
     public static final int SIZE_ONE = 1;
     public static final int FIRST_ELEMENT_IN_LIST = 0;
@@ -47,7 +48,7 @@ public class ElementHelper {
     }
 
     public static List<WebElement> getColumnOfTableWithIndex(WebElement table, int columnIndex){
-        String COLUMN_CSS = "tr > td:nth-child(" + columnIndex + ")";
+        String COLUMN_CSS = TABLE_CELLS_CSS + ":nth-child(" + columnIndex + ")";
         return table.findElements(By.cssSelector(COLUMN_CSS));
     }
 
