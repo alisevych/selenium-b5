@@ -11,8 +11,8 @@ public class LoginTests extends WebInit {
 
     @Test
     public void loginAsAdminTest() {
-        adminPage.open();
-        adminPage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
+        adminHomePage.open();
+        adminHomePage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
     }
 
 }

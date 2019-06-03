@@ -1,12 +1,15 @@
 package site;
 
-import site.pages.AdminPage;
-import site.pages.MainPage;
+import site.pages.*;
 
 public class LitecartSite {
 
     /* Admin pages */
-    public static AdminPage adminPage = new AdminPage();
+    public static AdminHomePage adminHomePage = new AdminHomePage();
+    public static AdminCountriesPage adminCountriesPage = new AdminCountriesPage();
+    public static AdminEditCountryPage adminEditCountryPage = new AdminEditCountryPage();
+    public static AdminGeoZonesPage adminGeoZonesPage = new AdminGeoZonesPage();
+    public static AdminEditGeoZonePage adminEditGeoZonePage = new AdminEditGeoZonePage();
 
     /* Online Store pages */
     public static MainPage mainPage = new MainPage();
