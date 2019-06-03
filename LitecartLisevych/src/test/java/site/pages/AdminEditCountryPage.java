@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static helpers.ElementHelper.getElementFromListAndCheckItIsUnique;
 import static helpers.ElementHelper.getElementWhenPresent;
 import static helpers.ElementHelper.getTableColumnWithHeader;
 

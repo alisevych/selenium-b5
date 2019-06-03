@@ -60,7 +60,7 @@ public class AdminTests extends WebInit {
     }
 
     /* Countries Tests */
-    @Test
+    @Test // Task 9
     public void checkCountriesAreSortedAlphabetically(){
         adminCountriesPage.open();
         adminHomePage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
@@ -68,7 +68,7 @@ public class AdminTests extends WebInit {
         verifyListOfWebElementsIsSortedAlphabetically(countries);
     }
 
-    @Test
+    @Test // Task 9
     public void checkZonesOnCountriesPagesAreSortedAlphabetically(){
         adminCountriesPage.open();
         adminHomePage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
@@ -84,24 +84,27 @@ public class AdminTests extends WebInit {
         int nextIndex = -1;
         for (int iIndex = 0; iIndex < indexesToGo.size(); iIndex++){
             nextIndex = indexesToGo.get(iIndex);
-            /* ToDo get Country column on Geo Zone Page */
-            List<WebElement> countries = adminGeoZonesPage.getCountryNames();
+            List<WebElement> countries = adminCountriesPage.getCountryNames();
             WebElement linkToClick = countries.get(nextIndex).findElement(By.tagName(LINK_TAG_NAME));
             linkToClick.click();
-            /* ToDo get Zone column on Edit Geo Zone Page is sorted... */
-            List<WebElement> countryZones = adminEditGeoZonePage.getZoneNames();
+            List<WebElement> countryZones = adminEditCountryPage.getZoneNames();
             verifyListOfWebElementsIsSortedAlphabetically(countryZones);
             adminCountriesPage.open();
         }
     }
+
     /* Geo Zones Tests */
-    @Test
+    /*
+     * Same as checkZonesOnCountriesPagesAreSortedAlphabetically,
+     * but starts on Geo Zones page. A little bit different in Zones check - dropdowns.
+     */
+    @Test // Task 9
     public void checkZonesOfGeoZonesPageAreSortedAlphabetically(){
         int INDEX_TO_IGNORE = 0;
-        adminGeoZonesPage.open();
+        adminGeoZonesPage.open(); // Difference is here
         adminHomePage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
         /* get indexes of zones different from 0 */
-        List<WebElement> countryZones; // ToDo get zones from AdminGeoZonesPage
+        List<WebElement> countryZones = adminGeoZonesPage.getCountryNames();
         List<Integer> indexesToGo = new ArrayList<>();
         for (int iZone = 0; iZone< countryZones.size(); iZone++){
             if (!countryZones.get(iZone).getText().equals(INDEX_TO_IGNORE))
@@ -111,14 +114,13 @@ public class AdminTests extends WebInit {
         int nextIndex = -1;
         for (int iIndex = 0; iIndex < indexesToGo.size(); iIndex++){
             nextIndex = indexesToGo.get(iIndex);
-            // ToDo getCountry names
             List<WebElement> countries = adminGeoZonesPage.getCountryNames();
             WebElement linkToClick = countries.get(nextIndex).findElement(By.tagName(LINK_TAG_NAME));
             linkToClick.click();
-            /* check column Name in Zones table is sorted alphabetically */
-            List<WebElement> countryZones = adminEditCountryPage.getZoneNames();
-            verifyListOfWebElementsIsSortedAlphabetically(countryZones);
-            adminCountriesPage.open();
+            /* check column Zone in Zones table is sorted alphabetically */
+            List<WebElement> zones = adminEditGeoZonePage.getZones();
+            verifyListOfWebElementsIsSortedAlphabetically(zones);
+            adminGeoZonesPage.open();
         }
     }
 
