@@ -26,4 +26,13 @@ public class ProductTests extends WebInit {
         }
         System.out.println("[AUT] Total counter of products verified: " + iProduct);
     }
+
+    /* Test checks that Product page opened is correct. */
+    @Test
+    public void  checkCorrectProductPageIsOpened() {
+        mainPage.open();
+        List<WebElement> products = mainPage.getProductsFromBlockCampaigns();
+        WebElement firstCampaignProduct = products.get(FIRST_ELEMENT_IN_LIST);
+        String productName1 = mainPage.getProductName(firstCampaignProduct);
+    }
 }
