@@ -29,19 +29,16 @@ public class ProductPage extends BasePage {
         getUniqueElement(driver, By.cssSelector(PRODUCT_BLOCK + " " +PRODUCT_NAME_CSS));
     }
 
-    public String getProductName(){
-        WebElement name = driver.findElement(By.cssSelector(PRODUCT_BLOCK + PRODUCT_NAME_CSS));
-        return name.getText();
+    public WebElement getProductName(){
+        return driver.findElement(By.cssSelector(PRODUCT_BLOCK + PRODUCT_NAME_CSS));
     }
 
-    public BigDecimal getProductRegularPrice(){
-        WebElement price = driver.findElement(By.cssSelector(PRODUCT_BLOCK + PRODUCT_REGULAR_PRICE_CSS));
-        return convertStringToBigDecimal(price.getText());
+    public WebElement getProductRegularPrice(){
+        return driver.findElement(By.cssSelector(PRODUCT_BLOCK + PRODUCT_REGULAR_PRICE_CSS));
     }
 
-    public BigDecimal getProductCampaignPrice(){
-        WebElement price = driver.findElement(By.cssSelector(PRODUCT_BLOCK + PRODUCT_CAMPAIGN_PRICE_CSS));
-        return convertStringToBigDecimal(price.getText());
+    public WebElement getProductCampaignPrice(){
+        return driver.findElement(By.cssSelector(PRODUCT_BLOCK + PRODUCT_CAMPAIGN_PRICE_CSS));
     }
 
 }

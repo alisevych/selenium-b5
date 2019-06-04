@@ -1,5 +1,6 @@
 package site.pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -39,19 +40,16 @@ public class MainPage extends BasePage {
         return product.findElements(By.cssSelector(ALL_STICKERS_CSS));
     }
 
-    public String getProductName(WebElement product){
-        WebElement name = getUniqueElementInBlock(product, By.cssSelector(PRODUCT_NAME_CSS));
-        return name.getText();
+    public WebElement getProductName(WebElement product){
+        return getUniqueElementInBlock(product, By.cssSelector(PRODUCT_NAME_CSS));
     }
 
-    public BigDecimal getProductRegularPrice(WebElement product){
-        WebElement price = getUniqueElementInBlock(product, By.cssSelector(PRODUCT_REGULAR_PRICE_CSS));
-        return convertStringToBigDecimal(price.getText());
+    public WebElement getProductRegularPrice(WebElement product){
+        return getUniqueElementInBlock(product, By.cssSelector(PRODUCT_REGULAR_PRICE_CSS));
     }
 
-    public BigDecimal getProductCampaignPrice(WebElement product){
-        WebElement price = getUniqueElementInBlock(product, By.cssSelector(PRODUCT_CAMPAIGN_PRICE_CSS));
-        return convertStringToBigDecimal(price.getText());
+    public WebElement getProductCampaignPrice(WebElement product){
+        return getUniqueElementInBlock(product, By.cssSelector(PRODUCT_CAMPAIGN_PRICE_CSS));
     }
 
 }

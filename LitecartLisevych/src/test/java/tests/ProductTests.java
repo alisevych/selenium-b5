@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static helpers.AmountHelper.convertStringToBigDecimal;
 import static site.LitecartSite.*;
 import static helpers.ElementHelper.*;
 
@@ -35,22 +36,34 @@ public class ProductTests extends WebInit {
         mainPage.open();
         List<WebElement> products = mainPage.getProductsFromBlockCampaigns();
         WebElement firstCampaignProduct = products.get(FIRST_ELEMENT_IN_LIST);
-        String nameMainPage = mainPage.getProductName(firstCampaignProduct);
-        BigDecimal regPriceMainPage = mainPage.getProductRegularPrice(firstCampaignProduct);
-        BigDecimal camPriceMainPage = mainPage.getProductCampaignPrice(firstCampaignProduct);
-        // go to Product page and check data there
+        WebElement nameLbl = mainPage.getProductName(firstCampaignProduct);
+        WebElement regularPriceLbl = mainPage.getProductRegularPrice(firstCampaignProduct);
+        WebElement campaignPriceLbl = mainPage.getProductCampaignPrice(firstCampaignProduct);
+        // get text from elements
+        String nameMainPage = nameLbl.getText();
+        BigDecimal regPriceMainPage = convertStringToBigDecimal(regularPriceLbl.getText());
+        BigDecimal camPriceMainPage = convertStringToBigDecimal(campaignPriceLbl.getText());
+        SoftAssertions softAssertions = new SoftAssertions();
+        // check styles of elements on Main page
+        assertElementColorIsGrey(regularPriceLbl, softAssertions);
+        // go to Product page and get data there
         firstCampaignProduct.click();
         productPage.checkOpened();
-        String nameProdPage = productPage.getProductName();
-        BigDecimal regPriceProdPage = productPage.getProductRegularPrice();
-        BigDecimal camPriceProdPage = productPage.getProductCampaignPrice();
-        SoftAssertions softAssert = new SoftAssertions();
-        softAssert.assertThat(nameMainPage.equals( nameProdPage));
-        softAssert.assertThat(regPriceMainPage.equals(regPriceProdPage));
-        softAssert.assertThat(camPriceMainPage.equals(camPriceProdPage));
-        System.out.println("[AL] Name : " + nameMainPage + "; " + nameProdPage);
+        nameLbl = productPage.getProductName();
+        String nameProdPage = nameLbl.getText();
+        regularPriceLbl = productPage.getProductRegularPrice();
+        campaignPriceLbl = productPage.getProductCampaignPrice();
+        // get text from elements
+        BigDecimal regPriceProdPage = convertStringToBigDecimal(regularPriceLbl.getText());
+        BigDecimal camPriceProdPage = convertStringToBigDecimal(campaignPriceLbl.getText());
+        softAssertions.assertThat(nameMainPage.equals( nameProdPage));
+        softAssertions.assertThat(regPriceMainPage.equals(regPriceProdPage));
+        softAssertions.assertThat(camPriceMainPage.equals(camPriceProdPage));
+        System.out.println("[AL] Prod name : " + nameMainPage + "; " + nameProdPage);
         System.out.println("[AL] Reg price : " + regPriceMainPage + "; " + regPriceProdPage);
         System.out.println("[AL] Cam price : " + camPriceMainPage + "; " + camPriceProdPage);
-        softAssert.assertAll();
+        // check styles of elements on Product page
+        assertElementColorIsGrey(regularPriceLbl, softAssertions);
+        softAssertions.assertAll();
     }
 }
