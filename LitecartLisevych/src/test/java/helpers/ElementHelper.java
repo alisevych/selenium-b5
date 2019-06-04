@@ -18,11 +18,12 @@ public class ElementHelper {
     public static final int SIZE_ONE = 1;
     public static final int FIRST_ELEMENT_IN_LIST = 0;
 
-    public static WebElement getElementFromListAndCheckItIsUnique(List<WebElement> webElementList){
-        if (webElementList.size() != SIZE_ONE)
+    public static WebElement getUniqueElement(WebDriver driver, By locator){
+        List<WebElement> elements = driver.findElements(locator);
+        if (elements.size() != SIZE_ONE)
             throw new RuntimeException ("[AUT_ERROR] One unique element expected to be, but found "
-                    + webElementList.size());
-        return webElementList.get(FIRST_ELEMENT_IN_LIST);
+                    + elements.size());
+        return elements.get(FIRST_ELEMENT_IN_LIST);
     }
 
     public static boolean areElementsPresent(WebDriver driver, By locator) {
