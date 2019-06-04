@@ -26,6 +26,7 @@ public class ElementHelper {
 
     public static final int SIZE_ONE = 1;
     public static final int FIRST_ELEMENT_IN_LIST = 0;
+    public static final int ZERO_VALUE = 0;
 
     public static WebElement getUniqueElement(WebDriver driver, By locator){
         List<WebElement> elements = driver.findElements(locator);
@@ -77,13 +78,6 @@ public class ElementHelper {
     }
 
     /* Styles */
-    public static void assertElementColorIsGrey(WebElement element, SoftAssertions softAssert){
-        ArrayList<Integer> colors = getColorsOfElement(element);
-        softAssert.assertThat(colors.get(0).equals(colors.get(1)));
-        softAssert.assertThat(colors.get(1).equals(colors.get(2)));
-        System.out.println("[AL] Must be GREY: " + colors);
-    }
-
     public static ArrayList<Integer> getColorsOfElement(WebElement element){
         String elementColors = element.getCssValue(CSS_COLOR);
         Pattern totalNumberOfItemsPattern = Pattern.compile(COLORS_NUMBERS_PATTERN);
@@ -92,6 +86,21 @@ public class ElementHelper {
         while (matcher.find())
             results.add(Float.valueOf(matcher.group()).intValue());
         return results;
+    }
+
+    public static void assertElementColorIsGrey(WebElement element, SoftAssertions softAssert){
+        ArrayList<Integer> colors = getColorsOfElement(element);
+        softAssert.assertThat(colors.get(0).equals(colors.get(1)));
+        softAssert.assertThat(colors.get(1).equals(colors.get(2)));
+        System.out.println("[AL] Must be GREY: " + colors);
+    }
+
+    public static void assertElementColorIsRed(WebElement element, SoftAssertions softAssert){
+        ArrayList<Integer> colors = getColorsOfElement(element);
+        softAssert.assertThat(!colors.get(0).equals(ZERO_VALUE));
+        softAssert.assertThat(colors.get(1).equals(ZERO_VALUE));
+        softAssert.assertThat(colors.get(2).equals(ZERO_VALUE));
+        System.out.println("[AL] Must be RED: " + colors);
     }
 
 }

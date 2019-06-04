@@ -46,6 +46,7 @@ public class ProductTests extends WebInit {
         SoftAssertions softAssertions = new SoftAssertions();
         // check styles of elements on Main page
         assertElementColorIsGrey(regularPriceLbl, softAssertions);
+        assertElementColorIsRed(campaignPriceLbl, softAssertions);
         // go to Product page and get data there
         firstCampaignProduct.click();
         productPage.checkOpened();
@@ -64,6 +65,7 @@ public class ProductTests extends WebInit {
         System.out.println("[AL] Cam price : " + camPriceMainPage + "; " + camPriceProdPage);
         // check styles of elements on Product page
         assertElementColorIsGrey(regularPriceLbl, softAssertions);
+        assertElementColorIsRed(campaignPriceLbl, softAssertions);
         softAssertions.assertAll();
     }
 }
