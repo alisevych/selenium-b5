@@ -3,9 +3,6 @@ package site.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.math.BigDecimal;
-
-import static helpers.AmountHelper.convertStringToBigDecimal;
 import static helpers.ElementHelper.*;
 
 public class ProductPage extends BasePage {

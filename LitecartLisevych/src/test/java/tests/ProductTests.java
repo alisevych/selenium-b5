@@ -46,7 +46,12 @@ public class ProductTests extends WebInit {
         SoftAssertions softAssertions = new SoftAssertions();
         // check styles of elements on Main page
         assertElementColorIsGrey(regularPriceLbl, softAssertions);
+        assertElementFontIsLinedThrough(regularPriceLbl, softAssertions);
         assertElementColorIsRed(campaignPriceLbl, softAssertions);
+        // ToDo check font is BOLD - !!!
+        assertElementFontIsBold(campaignPriceLbl, softAssertions);
+        // ToDo check font is striked through - !!!
+        isSecondElementBiggerThanFirst(regularPriceLbl, campaignPriceLbl);
         // go to Product page and get data there
         firstCampaignProduct.click();
         productPage.checkOpened();
@@ -65,7 +70,12 @@ public class ProductTests extends WebInit {
         System.out.println("[AL] Cam price : " + camPriceMainPage + "; " + camPriceProdPage);
         // check styles of elements on Product page
         assertElementColorIsGrey(regularPriceLbl, softAssertions);
+        assertElementFontIsLinedThrough(regularPriceLbl, softAssertions);
         assertElementColorIsRed(campaignPriceLbl, softAssertions);
+        // ToDo check font is BOLD - !!!
+        assertElementFontIsBold(campaignPriceLbl, softAssertions);
+        // ToDo check font is striked through - !!!
+        isSecondElementBiggerThanFirst(regularPriceLbl, campaignPriceLbl);
         softAssertions.assertAll();
     }
 }

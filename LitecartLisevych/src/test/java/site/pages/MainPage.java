@@ -1,14 +1,11 @@
 package site.pages;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static helpers.ElementHelper.*;
-import static helpers.AmountHelper.*;
 
 public class MainPage extends BasePage {
 
