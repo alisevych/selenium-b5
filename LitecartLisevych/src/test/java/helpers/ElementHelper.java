@@ -26,6 +26,14 @@ public class ElementHelper {
         return elements.get(FIRST_ELEMENT_IN_LIST);
     }
 
+    public static WebElement getUniqueElementInBlock(WebElement block, By locator){
+        List<WebElement> elements = block.findElements(locator);
+        if (elements.size() != SIZE_ONE)
+            throw new RuntimeException ("[AUT_ERROR] One unique element expected to be, but found "
+                    + elements.size());
+        return elements.get(FIRST_ELEMENT_IN_LIST);
+    }
+
     public static boolean areElementsPresent(WebDriver driver, By locator) {
         return driver.findElements(locator).size() > 0;
     }

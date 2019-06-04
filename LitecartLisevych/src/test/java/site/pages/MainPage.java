@@ -11,9 +11,6 @@ import static helpers.AmountHelper.*;
 
 public class MainPage extends BasePage {
 
-    /* Labels */
-    public static final String CAMPAIGNS_HEADER_TEXT = "Campaigns";
-
     /* Blocks */
     public static final String CAMPAIGNS_BLOCK_CSS = "#box-campaigns";
 
@@ -43,17 +40,17 @@ public class MainPage extends BasePage {
     }
 
     public String getProductName(WebElement product){
-        WebElement name = driver.findElement(By.cssSelector(PRODUCT_NAME_CSS));
+        WebElement name = getUniqueElementInBlock(product, By.cssSelector(PRODUCT_NAME_CSS));
         return name.getText();
     }
 
     public BigDecimal getProductRegularPrice(WebElement product){
-        WebElement price = driver.findElement(By.cssSelector(PRODUCT_REGULAR_PRICE_CSS));
+        WebElement price = getUniqueElementInBlock(product, By.cssSelector(PRODUCT_REGULAR_PRICE_CSS));
         return convertStringToBigDecimal(price.getText());
     }
 
     public BigDecimal getProductCampaignPrice(WebElement product){
-        WebElement price = driver.findElement(By.cssSelector(PRODUCT_CAMPAIGN_PRICE_CSS));
+        WebElement price = getUniqueElementInBlock(product, By.cssSelector(PRODUCT_CAMPAIGN_PRICE_CSS));
         return convertStringToBigDecimal(price.getText());
     }
 

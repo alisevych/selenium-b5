@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static site.LitecartSite.*;
@@ -33,6 +34,20 @@ public class ProductTests extends WebInit {
         mainPage.open();
         List<WebElement> products = mainPage.getProductsFromBlockCampaigns();
         WebElement firstCampaignProduct = products.get(FIRST_ELEMENT_IN_LIST);
-        String productName1 = mainPage.getProductName(firstCampaignProduct);
+        String nameMainPage = mainPage.getProductName(firstCampaignProduct);
+        BigDecimal regPriceMainPage = mainPage.getProductRegularPrice(firstCampaignProduct);
+        BigDecimal camPriceMainPage = mainPage.getProductCampaignPrice(firstCampaignProduct);
+        // go to Product page and check data there
+        firstCampaignProduct.click();
+        productPage.checkOpened();
+        String nameProdPage = productPage.getProductName();
+        BigDecimal regPriceProdPage = productPage.getProductRegularPrice();
+        BigDecimal camPriceProdPage = productPage.getProductCampaignPrice();
+        Assert.assertEquals(nameMainPage, nameProdPage);
+        Assert.assertEquals(regPriceMainPage, regPriceProdPage);
+        Assert.assertEquals(camPriceMainPage, camPriceProdPage);
+        System.out.println("[AL] Name : " + nameMainPage + "; " + nameProdPage);
+        System.out.println("[AL] Reg price : " + regPriceMainPage + "; " + regPriceProdPage);
+        System.out.println("[AL] Cam price : " + camPriceMainPage + "; " + camPriceProdPage);
     }
 }
