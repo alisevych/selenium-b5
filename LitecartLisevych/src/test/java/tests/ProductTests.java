@@ -1,6 +1,7 @@
 package tests;
 
 import org.junit.Assert;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
@@ -43,11 +44,13 @@ public class ProductTests extends WebInit {
         String nameProdPage = productPage.getProductName();
         BigDecimal regPriceProdPage = productPage.getProductRegularPrice();
         BigDecimal camPriceProdPage = productPage.getProductCampaignPrice();
-        Assert.assertEquals(nameMainPage, nameProdPage);
-        Assert.assertEquals(regPriceMainPage, regPriceProdPage);
-        Assert.assertEquals(camPriceMainPage, camPriceProdPage);
+        SoftAssertions softAssert = new SoftAssertions();
+        softAssert.assertThat(nameMainPage.equals( nameProdPage));
+        softAssert.assertThat(regPriceMainPage.equals(regPriceProdPage));
+        softAssert.assertThat(camPriceMainPage.equals(camPriceProdPage));
         System.out.println("[AL] Name : " + nameMainPage + "; " + nameProdPage);
         System.out.println("[AL] Reg price : " + regPriceMainPage + "; " + regPriceProdPage);
         System.out.println("[AL] Cam price : " + camPriceMainPage + "; " + camPriceProdPage);
+        softAssert.assertAll();
     }
 }
