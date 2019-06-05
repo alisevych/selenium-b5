@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Dimension;
+import tests.WebInit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,14 +116,17 @@ public class ElementHelper {
     }
 
     public static void assertElementFontIsLinedThrough(WebElement element, SoftAssertions softAssertions){
-        String textDecorationLine = element.getCssValue(TEXT_DECORATION_LINE);
-        String tagName = "";
-        if (textDecorationLine != "") {
+        String browserName = new InputHelper().getPropertyValue("driver");
+        String tagName = element.getTagName();
+        if (browserName == WebInit.IE_NAME) {
+            tagName = element.getTagName();
+            softAssertions.assertThat(tagName.equals(LINE_THROUGH_TAG_NAME));
+            System.out.println("[AL] Must be S: " + tagName);
+        }
+        else {
+            String textDecorationLine = element.getCssValue(TEXT_DECORATION_LINE);
             softAssertions.assertThat(textDecorationLine.equals(LINE_THROUGH_STYLE));
             System.out.println("[AL] Must be LINE THROUGH: " + textDecorationLine);
-        }
-        else{
-            softAssertions.assertThat(element.getTagName().equals(LINE_THROUGH_TAG_NAME));
         }
     }
 
