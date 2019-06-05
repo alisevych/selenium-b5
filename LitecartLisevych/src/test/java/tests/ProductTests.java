@@ -48,9 +48,7 @@ public class ProductTests extends WebInit {
         assertElementColorIsGrey(regularPriceLbl, softAssertions);
         assertElementFontIsLinedThrough(regularPriceLbl, softAssertions);
         assertElementColorIsRed(campaignPriceLbl, softAssertions);
-        // ToDo check font is BOLD - !!!
-        assertElementFontIsBold(campaignPriceLbl, softAssertions);
-        // ToDo check font is striked through - !!!
+        assertElementFontIsStrong(campaignPriceLbl, softAssertions);
         isSecondElementBiggerThanFirst(regularPriceLbl, campaignPriceLbl);
         // go to Product page and get data there
         firstCampaignProduct.click();
@@ -72,9 +70,7 @@ public class ProductTests extends WebInit {
         assertElementColorIsGrey(regularPriceLbl, softAssertions);
         assertElementFontIsLinedThrough(regularPriceLbl, softAssertions);
         assertElementColorIsRed(campaignPriceLbl, softAssertions);
-        // ToDo check font is BOLD - !!!
-        assertElementFontIsBold(campaignPriceLbl, softAssertions);
-        // ToDo check font is striked through - !!!
+        assertElementFontIsStrong(campaignPriceLbl, softAssertions);
         isSecondElementBiggerThanFirst(regularPriceLbl, campaignPriceLbl);
         softAssertions.assertAll();
     }

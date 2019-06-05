@@ -20,7 +20,8 @@ public class ElementHelper {
     public static final String CSS_COLOR = "color";
     public static String COLORS_NUMBERS_PATTERN = "(\\d+)";
     public static final String FONT_WEIGHT = "font-weight";
-    public static final String BOLD_STYLE = "bold";
+    public static final String STRONG_TEXT_TAG = "strong";
+    public static final String LINE_THROUGH_TAG_NAME = "s";
     public static final String TEXT_DECORATION_LINE = "text-decoration-line";
     public static final String LINE_THROUGH_STYLE = "line-through";
 
@@ -107,18 +108,22 @@ public class ElementHelper {
         System.out.println("[AL] Must be RED: " + colors);
     }
 
-    public static void assertElementFontIsBold(WebElement element, SoftAssertions softAssertions){
-        // ToDo check font is BOLD - !!!
-        String fontWeight = element.getCssValue(FONT_WEIGHT);
-        softAssertions.assertThat(fontWeight.equals(BOLD_STYLE));
-        System.out.println("[AL] Must be BOLD: " + fontWeight);
+    public static void assertElementFontIsStrong(WebElement element, SoftAssertions softAssertions){
+        String tagName = element.getTagName();
+        softAssertions.assertThat(tagName.equals(STRONG_TEXT_TAG));
+        System.out.println("[AL] Must be STRONG: " + tagName);
     }
 
     public static void assertElementFontIsLinedThrough(WebElement element, SoftAssertions softAssertions){
-        // ToDo check font is striked through - !!!
         String textDecorationLine = element.getCssValue(TEXT_DECORATION_LINE);
-        softAssertions.assertThat(textDecorationLine.equals(LINE_THROUGH_STYLE));
-        System.out.println("[AL] Must be LINE THROUGH: " + textDecorationLine);
+        String tagName = "";
+        if (textDecorationLine != "") {
+            softAssertions.assertThat(textDecorationLine.equals(LINE_THROUGH_STYLE));
+            System.out.println("[AL] Must be LINE THROUGH: " + textDecorationLine);
+        }
+        else{
+            softAssertions.assertThat(element.getTagName().equals(LINE_THROUGH_TAG_NAME));
+        }
     }
 
     public static boolean isSecondElementBiggerThanFirst (WebElement element1, WebElement element2){

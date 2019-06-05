@@ -2,6 +2,7 @@ package site.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static helpers.ElementHelper.*;
 
@@ -23,7 +24,8 @@ public class ProductPage extends BasePage {
 
     @Override
     public void checkOpened(){
-        getUniqueElement(driver, By.cssSelector(PRODUCT_BLOCK + " " +PRODUCT_NAME_CSS));
+        driverWait.until(ExpectedConditions.
+                presenceOfElementLocated(By.cssSelector(PRODUCT_BLOCK + " " +PRODUCT_NAME_CSS)));
     }
 
     public WebElement getProductName(){
