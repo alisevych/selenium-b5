@@ -58,12 +58,12 @@ public class ProductTests extends WebInit {
         // get text from elements
         BigDecimal regPriceProdPage = convertStringToBigDecimal(regularPriceLbl.getText());
         BigDecimal camPriceProdPage = convertStringToBigDecimal(campaignPriceLbl.getText());
-        Assert.assertEquals(nameMainPage, nameProdPage);
-        Assert.assertEquals(regPriceMainPage, regPriceProdPage);
-        Assert.assertEquals(camPriceMainPage, camPriceProdPage);
         System.out.println("[AL] Prod name : " + nameMainPage + "; " + nameProdPage);
         System.out.println("[AL] Reg price : " + regPriceMainPage + "; " + regPriceProdPage);
         System.out.println("[AL] Cam price : " + camPriceMainPage + "; " + camPriceProdPage);
+        Assert.assertEquals(nameMainPage, nameProdPage);
+        Assert.assertEquals(regPriceMainPage, regPriceProdPage);
+        Assert.assertEquals(camPriceMainPage, camPriceProdPage);
         // check styles of elements on Product page
         Assert.assertTrue(isElementColorIsGrey(regularPriceLbl));
         Assert.assertTrue(isElementFontIsLinedThrough(regularPriceLbl));
