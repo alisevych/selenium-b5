@@ -1,6 +1,7 @@
 package helpers;
 
 import org.assertj.core.api.SoftAssertions;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,7 @@ public class ElementHelper {
 
     public static final int SIZE_ONE = 1;
     public static final int FIRST_ELEMENT_IN_LIST = 0;
-    public static final int ZERO_VALUE = 0;
+    public static final Integer ZERO_VALUE = 0;
 
     public static WebElement getUniqueElement(WebDriver driver, By locator){
         List<WebElement> elements = driver.findElements(locator);
@@ -94,39 +95,52 @@ public class ElementHelper {
         return results;
     }
 
-    public static void assertElementColorIsGrey(WebElement element, SoftAssertions softAssert){
+    public static boolean isElementColorIsGrey(WebElement element){
         ArrayList<Integer> colors = getColorsOfElement(element);
-        softAssert.assertThat(colors.get(0).equals(colors.get(1)));
-        softAssert.assertThat(colors.get(1).equals(colors.get(2)));
         System.out.println("[AL] Must be GREY: " + colors);
+        if (colors.get(0).equals(colors.get(1)))
+            if (colors.get(1).equals(colors.get(2)))
+                return true;
+        return false;
     }
 
-    public static void assertElementColorIsRed(WebElement element, SoftAssertions softAssert){
+    public static boolean isElementColorIsRed(WebElement element){
         ArrayList<Integer> colors = getColorsOfElement(element);
-        softAssert.assertThat(!colors.get(0).equals(ZERO_VALUE));
-        softAssert.assertThat(colors.get(1).equals(ZERO_VALUE));
-        softAssert.assertThat(colors.get(2).equals(ZERO_VALUE));
         System.out.println("[AL] Must be RED: " + colors);
+        if (colors.get(0) != ZERO_VALUE)
+            if (colors.get(1) == ZERO_VALUE)
+                if (colors.get(2) == ZERO_VALUE)
+                    return true;
+        return false;
     }
 
-    public static void assertElementFontIsStrong(WebElement element, SoftAssertions softAssertions){
+    public static boolean isElementFontIsStrong(WebElement element){
         String tagName = element.getTagName();
-        softAssertions.assertThat(tagName.equals(STRONG_TEXT_TAG));
         System.out.println("[AL] Must be STRONG: " + tagName);
+        if (tagName.equals(STRONG_TEXT_TAG))
+            return true;
+        else
+            return false;
     }
 
-    public static void assertElementFontIsLinedThrough(WebElement element, SoftAssertions softAssertions){
+    public static boolean isElementFontIsLinedThrough(WebElement element){
         String browserName = new InputHelper().getPropertyValue("driver");
         String tagName = element.getTagName();
-        if (browserName == WebInit.IE_NAME) {
+        if (browserName.equals(WebInit.IE_NAME)) {
             tagName = element.getTagName();
-            softAssertions.assertThat(tagName.equals(LINE_THROUGH_TAG_NAME));
             System.out.println("[AL] Must be S: " + tagName);
+            if (tagName.equals(LINE_THROUGH_TAG_NAME))
+                return true;
+            else
+                return false;
         }
         else {
             String textDecorationLine = element.getCssValue(TEXT_DECORATION_LINE);
-            softAssertions.assertThat(textDecorationLine.equals(LINE_THROUGH_STYLE));
             System.out.println("[AL] Must be LINE THROUGH: " + textDecorationLine);
+            if (textDecorationLine.equals(LINE_THROUGH_STYLE))
+                return true;
+            else
+                return false;
         }
     }
 
