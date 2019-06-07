@@ -9,7 +9,7 @@ public class UserTests extends WebInit {
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "admin";
 
-    @Test
+    @Test // Task 11
     public void registerUserTest() {
         mainPage.open();
         mainPage.clickNewCustomersLink();
