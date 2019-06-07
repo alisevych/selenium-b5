@@ -34,7 +34,7 @@ public class AdminEditGeoZonePage extends BasePage {
         for (int index = FIRST_ELEMENT_IN_LIST + 1; index < zoneDropdowns.size(); index++){
             WebElement dropdown = zoneDropdowns.get(index);
             List<WebElement> option = dropdown.findElements(By.cssSelector(SELECTED_OPTION_CSS));
-            WebElement optionSelected = getElementFromListAndCheckItIsUnique(option);
+            WebElement optionSelected = option.get(FIRST_ELEMENT_IN_LIST);
             zoneSelected.add(optionSelected);
         }
         return zoneSelected;
