@@ -30,16 +30,17 @@ public class AdminHomePage extends BasePage {
     }
 
     public void loginAsAdmin(String username, String password) {
-        driver.findElement(By.name(USERNAME_INPUT_NAME)).sendKeys(username);
-        driver.findElement(By.name(PASSWORD_INPUT_NAME)).sendKeys(password);
-        driver.findElement(By.name(LOGIN_BUTTON_NAME)).click();
-        getCoreLinks(); // initializing numberOfCoreLInks;
+        List<WebElement> usernameInput = driver.findElements(By.name(USERNAME_INPUT_NAME));
+        if (usernameInput.size() == SIZE_ONE) {
+            driver.findElement(By.name(USERNAME_INPUT_NAME)).sendKeys(username);
+            driver.findElement(By.name(PASSWORD_INPUT_NAME)).sendKeys(password);
+            driver.findElement(By.name(LOGIN_BUTTON_NAME)).click();
+        }
+        //getCoreLinks(); // initializing numberOfCoreLInks;
     }
 
     public WebElement getAppsMenu() {
-        List<WebElement> elements = driver.findElements(By.cssSelector(APPS_MENU_CSS));
-        //List<WebElement> elements = driver.findElements(By.xpath(APPS_MENU_XPATH));
-        return getElementFromListAndCheckItIsUnique(elements);
+        return getUniqueElement(driver, By.cssSelector(APPS_MENU_CSS));
     }
 
     public List<WebElement> getCoreLinks() {
