@@ -12,7 +12,6 @@ public class User {
     public String city;
     public String country;
     public String state;
-    public int stateNumber;
     public String email;
     public String phone;
     public boolean newsletterSubscribe;
@@ -23,18 +22,32 @@ public class User {
     }
 
     public User(String firstName, String lastName, String address1, String postcode,
-                String city, String country, int stateNumber, String email, String phone, String password){
+                String city, String country, String state, String email, String phone, String password){
         this.firstName = firstName;
         this.lastName = lastName;
         this.address1 = address1;
         this.postcode = postcode;
         this.city = city;
         this.country = country;
-        this.stateNumber = stateNumber;
+        this.state = state;
         this.email = email;
         this.phone = phone;
         this.desiredPassword = password;
         this.confirmPassword = password;
+    }
+
+    public User(User initialUser){
+        this.firstName = initialUser.firstName;
+        this.lastName = initialUser.lastName;
+        this.address1 = initialUser.address1;
+        this.postcode = initialUser.postcode;
+        this.city = initialUser.city;
+        this.country = initialUser.country;
+        this.state= initialUser.state;
+        this.email = initialUser.email;
+        this.phone = initialUser.phone;
+        this.desiredPassword = initialUser.desiredPassword;
+        this.confirmPassword = initialUser.confirmPassword;
     }
 
     public void setTaxID(String taxID) {
@@ -71,6 +84,10 @@ public class User {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public void setState(String state) {
+        this.state= state;
     }
 
     public void setEmail(String email) {

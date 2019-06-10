@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Dimension;
-import tests.WebInit;
 
 import static tests.WebInit.*;
 
@@ -51,8 +50,9 @@ public class ElementHelper {
         return elements.get(FIRST_ELEMENT_IN_LIST);
     }
 
-    public static boolean areElementsPresent(WebDriver driver, By locator) {
-        return driver.findElements(locator).size() > 0;
+    public static List<WebElement> getListWhenPresent(WebDriverWait wait, WebDriver driver, By locator) {
+        wait.until(presenceOfElementLocated(locator));
+        return driver.findElements(locator);
     }
 
     public static WebElement getElementWhenPresent (WebDriverWait wait, By locator) {

@@ -17,9 +17,9 @@ public class BasePage extends WebInit {
     }
 
     public void checkOpened(){
-        Assert.assertTrue(driver.getTitle().contains(title));
         Assert.assertTrue(driver.getCurrentUrl().contains(domain));
         Assert.assertTrue(driver.getCurrentUrl().contains(url));
+        Assert.assertTrue(driver.getTitle().contains(title));
     }
 
 }

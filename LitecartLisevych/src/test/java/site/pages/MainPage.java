@@ -1,8 +1,8 @@
 package site.pages;
 
-import helpers.ElementHelper.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import site.entities.User;
 
 import java.util.List;
 
@@ -27,6 +27,10 @@ public class MainPage extends BasePage {
     public static final String LOGIN_BTN_CSS = " [name=login]";
     public static final String LOST_PASSWORD_BTN_CSS = " [name=lost_password]";
     public static final String NEW_CUSTOMERS_LINK_CSS = " a[href$='create_account']";
+
+    /* Account form */
+    public static final String ACCOUNT_FORM_CSS = " #box-account";
+    public static final String LOGOUT_LINK_CSS = " a[href$='logout']";
 
     public MainPage() {
         url = "";
@@ -59,7 +63,19 @@ public class MainPage extends BasePage {
     }
 
     public void clickNewCustomersLink(){
-        driver.findElement(By.cssSelector(LOGIN_FORM_CSS + NEW_CUSTOMERS_LINK_CSS)).click();
+        getUniqueElement(driver, By.cssSelector(LOGIN_FORM_CSS + NEW_CUSTOMERS_LINK_CSS)).click();
     }
 
+    public void logout() {
+        getUniqueElement(driver, By.cssSelector(ACCOUNT_FORM_CSS + LOGOUT_LINK_CSS)).click();
+    }
+
+    public void loginAs(User user) {
+        getUniqueElement(driver, By.cssSelector(LOGIN_FORM_CSS + EMAIL_INPUT_CSS)).
+                sendKeys(user.email);
+        getUniqueElement(driver, By.cssSelector(LOGIN_FORM_CSS + PASSWORD_INPUT_CSS)).
+                sendKeys(user.desiredPassword);
+        getUniqueElement(driver, By.cssSelector(LOGIN_FORM_CSS + LOGIN_BTN_CSS)).
+                click();
+    }
 }
