@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import site.entities.User;
 
-import java.util.List;
-
 public class CreateAccountPage extends BasePage {
 
     /* Create account form */
@@ -20,7 +18,7 @@ public class CreateAccountPage extends BasePage {
     public static final String CONFIRM_PASSWORD_INPUT_CSS = " [name=confirmed_password]";
 
     public CreateAccountPage() {
-        url = "http://litecart.stqa.ru/en/create_account";
+        url = "/create_account";
         title = "Create Account | My Store";
     }
 

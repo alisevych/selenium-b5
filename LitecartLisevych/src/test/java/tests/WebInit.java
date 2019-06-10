@@ -23,6 +23,8 @@ public class WebInit {
     protected WebDriverWait driverWait;
     protected static final int timeout = 10;
 
+    public static String domain;
+
     private static final String CHROME_NAME = "chrome";
     private static final String IE_NAME = "IExplorer";
     private static final String FIREFOX_NAME = "firefox";
@@ -31,6 +33,10 @@ public class WebInit {
 
     @Before
     public void start() {
+        /* init domain */
+        if (domain == null){
+            domain = new InputHelper().getPropertyValue("domain");
+        }
         /* For parallel run 1 driver for 1 thread */
         if (tlDriver.get() != null) {
             driver = tlDriver.get();

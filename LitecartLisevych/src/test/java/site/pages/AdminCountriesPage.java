@@ -16,7 +16,7 @@ public class AdminCountriesPage extends BasePage {
     WebElement countriesTable;
 
     public AdminCountriesPage() {
-        url = "http://localhost/litecart/admin/?app=countries&doc=countries";
+        url = "/admin/?app=countries&doc=countries";
         title = "Countries | Lisevych Software";
     }
 

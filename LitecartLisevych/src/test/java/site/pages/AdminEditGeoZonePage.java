@@ -18,7 +18,7 @@ public class AdminEditGeoZonePage extends BasePage {
     WebElement zonesTable;
 
     public AdminEditGeoZonePage() {
-        url = "http://localhost/litecart/admin/?app=geo_zones&doc=edit_geo_zone";
+        url = "/admin/?app=geo_zones&doc=edit_geo_zone";
         title = "Edit Geo Zone | Lisevych Software";
     }
 

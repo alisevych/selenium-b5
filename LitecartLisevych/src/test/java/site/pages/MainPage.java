@@ -23,7 +23,7 @@ public class MainPage extends BasePage {
     public static final String NEW_CUSTOMERS_LINK_CSS = " a[href$='create_account']";
 
     public MainPage() {
-        url = "http://litecart.stqa.ru/en/";
+        url = "";
         title = "Online Store | Lisevych Software";
     }
 
