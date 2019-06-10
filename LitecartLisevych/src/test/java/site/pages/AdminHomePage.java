@@ -26,7 +26,7 @@ public class AdminHomePage extends BasePage {
 
     public AdminHomePage() {
         url = "/admin/";
-        title = "Lisevych Software";
+        title = "";
     }
 
     public void loginAsAdmin(String username, String password) {

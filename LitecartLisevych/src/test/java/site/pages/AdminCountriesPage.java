@@ -17,7 +17,7 @@ public class AdminCountriesPage extends BasePage {
 
     public AdminCountriesPage() {
         url = "/admin/?app=countries&doc=countries";
-        title = "Countries | Lisevych Software";
+        title = "Countries";
     }
 
     public WebElement getCountriesTable(){

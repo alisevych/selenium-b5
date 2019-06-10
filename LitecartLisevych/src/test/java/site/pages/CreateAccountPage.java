@@ -19,7 +19,7 @@ public class CreateAccountPage extends BasePage {
 
     public CreateAccountPage() {
         url = "/create_account";
-        title = "Create Account | My Store";
+        title = "Create Account";
     }
 
     public void fillCreateAccountForm(User newUser){

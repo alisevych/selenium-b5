@@ -24,11 +24,11 @@ public class WebInit {
 
     public static String domain;
 
-    private static final String CHROME_NAME = "chrome";
-    private static final String IE_NAME = "IExplorer";
-    private static final String FIREFOX_NAME = "firefox";
-    private static final String FIREFOX_OLD_NAME = "firefoxOld";
-    private static final String FIREFOX_NIGHTLY_NAME = "firefoxNightly";
+    public static final String CHROME_NAME = "chrome";
+    public static final String IE_NAME = "IExplorer";
+    public static final String FIREFOX_NAME = "firefox";
+    public static final String FIREFOX_OLD_NAME = "firefoxOld";
+    public static final String FIREFOX_NIGHTLY_NAME = "firefoxNightly";
 
     @Before
     public void start() {

@@ -18,7 +18,7 @@ public class AdminEditCountryPage extends BasePage {
 
     public AdminEditCountryPage() {
         url = "/admin/?app=countries&doc=edit_country";
-        title = "Edit Country | Lisevych Software";
+        title = "Edit Country";
     }
 
     public WebElement getZonesTable(){

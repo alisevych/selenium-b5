@@ -30,7 +30,7 @@ public class MainPage extends BasePage {
 
     public MainPage() {
         url = "";
-        title = "Online Store | Lisevych Software";
+        title = "Online Store";
     }
 
     public List<WebElement> getAllProductsList() {

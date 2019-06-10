@@ -1,13 +1,13 @@
 package helpers;
 
-import org.assertj.core.api.SoftAssertions;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Dimension;
 import tests.WebInit;
+
+import static tests.WebInit.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,8 +126,7 @@ public class ElementHelper {
     public static boolean isElementFontIsLinedThrough(WebElement element){
         String browserName = new InputHelper().getPropertyValue("driver");
         String tagName = element.getTagName();
-        if (browserName.equals(WebInit.IE_NAME)) {
-            tagName = element.getTagName();
+        if (browserName.equals(IE_NAME)) {
             System.out.println("[AL] Must be S: " + tagName);
             if (tagName.equals(LINE_THROUGH_TAG_NAME))
                 return true;
