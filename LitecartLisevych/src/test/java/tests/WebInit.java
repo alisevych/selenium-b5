@@ -14,7 +14,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 public class WebInit {
 
@@ -22,6 +21,8 @@ public class WebInit {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
     protected static final int timeout = 10;
+
+    public static String domain;
 
     public static final String CHROME_NAME = "chrome";
     public static final String IE_NAME = "IExplorer";
@@ -31,6 +32,10 @@ public class WebInit {
 
     @Before
     public void start() {
+        /* init domain */
+        if (domain == null){
+            domain = new InputHelper().getPropertyValue("domain");
+        }
         /* For parallel run 1 driver for 1 thread */
         if (tlDriver.get() != null) {
             driver = tlDriver.get();

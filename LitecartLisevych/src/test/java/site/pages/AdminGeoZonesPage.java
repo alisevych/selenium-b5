@@ -9,8 +9,8 @@ import static site.LitecartSite.*;
 public class AdminGeoZonesPage extends BasePage {
 
     public AdminGeoZonesPage() {
-        url = "http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones";
-        title = "Geo Zones | Lisevych Software";
+        url = "/admin/?app=geo_zones&doc=geo_zones";
+        title = "Geo Zones";
     }
 
     public WebElement getGeoZonesTable(){

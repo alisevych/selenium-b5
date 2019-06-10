@@ -19,7 +19,7 @@ public class ProductPage extends BasePage {
 
     public ProductPage() {
         url = "http://localhost/litecart/";
-        title = "| Lisevych Software";
+        title = "";
     }
 
     @Override

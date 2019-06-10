@@ -25,8 +25,8 @@ public class AdminHomePage extends BasePage {
     public static final String PAGE_HEADER_CSS = "h1";
 
     public AdminHomePage() {
-        url = "http://localhost/litecart/admin/";
-        title = "Lisevych Software";
+        url = "/admin/";
+        title = "";
     }
 
     public void loginAsAdmin(String username, String password) {

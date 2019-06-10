@@ -17,8 +17,8 @@ public class AdminEditCountryPage extends BasePage {
     WebElement zonesTable;
 
     public AdminEditCountryPage() {
-        url = "http://localhost/litecart/admin/?app=countries&doc=edit_country";
-        title = "Edit Country | Lisevych Software";
+        url = "/admin/?app=countries&doc=edit_country";
+        title = "Edit Country";
     }
 
     public WebElement getZonesTable(){
