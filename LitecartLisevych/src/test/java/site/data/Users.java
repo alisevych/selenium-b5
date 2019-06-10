@@ -3,6 +3,8 @@ package site.data;
 import helpers.DateHelper;
 import site.entities.User;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Users {
@@ -10,6 +12,7 @@ public class Users {
     public static Random random = new Random();
 
     public static final String EMAIL_ENDING = "@sel.ali";
+    public static final List<String> states = Arrays.asList( "Alaska", "Montana", "Oklahoma");
 
     public static final String UNIQUE_ID = DateHelper.getCurrentDateTimeNoSeparators();
 
@@ -19,7 +22,7 @@ public class Users {
     public static final String NEW_POSTCODE = String.valueOf(random.nextInt(99999));
     public static final String NEW_CITY = "Autotest";
     public static final String NEW_COUNTRY = "United States";
-    public static final String NEW_STATE = "Alaska";
+    public static final String NEW_STATE = states.get(random.nextInt(states.size()));
     public static final String NEW_EMAIL = "auto" + UNIQUE_ID + EMAIL_ENDING;
     public static final String NEW_PHONE = "+1" + random.nextInt(999999999);
     public static final String NEW_PASSWORD = "test" + random.nextInt(999)+"%";
