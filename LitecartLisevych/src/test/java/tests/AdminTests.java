@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static site.LitecartSite.*;
+import static site.pages.AdminHomePage.*;
 
 public class AdminTests extends WebInit {
 
@@ -124,5 +125,14 @@ public class AdminTests extends WebInit {
         }
     }
 
+    /* Product tests */
+    @Test // Task 12
+    public void addNewProductTest() {
+        adminHomePage.open();
+        adminHomePage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
+        adminHomePage.clickCoreLinkByText(CATALOG_LINK_TEXT);
+        adminCatalogPage.checkOpened();
+        adminCatalogPage.clickAddNewProductBtn();
 
+    }
 }

@@ -10,6 +10,9 @@ import static helpers.ElementHelper.*;
 
 public class AdminHomePage extends BasePage {
 
+    /* Labels */
+    public static final String CATALOG_LINK_TEXT = "Catalog";
+
     /* Login Form */
     public static final String USERNAME_INPUT_NAME = "username";
     public static final String PASSWORD_INPUT_NAME = "password";
@@ -66,6 +69,17 @@ public class AdminHomePage extends BasePage {
         System.out.println("[AUT] Core Link: " + coreLink.getText());
         coreLink.click();
         getSublinks(); // initialize number of sublinks displayed
+    }
+
+    public void clickCoreLinkByText(String text) {
+        for (WebElement coreLink : getCoreLinks()){
+            if (coreLink.getText().equals(text)) {
+                coreLink.click();
+                System.out.println("[AUT] Core Link clicked: " + text);
+                getSublinks(); // initialize number of sublinks displayed
+                return;
+            }
+        }
     }
 
     public void clickSublinkByNumber(int number){

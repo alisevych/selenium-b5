@@ -14,6 +14,12 @@ public class Dropdown {
     public By expandLoc;
     public By inputLoc;
 
+    public Dropdown(By rootLoc) {
+        this.selectedLoc = rootLoc;
+        this.expandLoc = rootLoc;
+        this.inputLoc = rootLoc;
+    }
+
     public Dropdown(By selectedLoc, By expandLoc, By inputLoc) {
         this.selectedLoc = selectedLoc;
         this.expandLoc = expandLoc;
