@@ -11,7 +11,7 @@ import static helpers.ElementHelper.getTableColumnWithHeader;
 public class AdminCatalogPage extends BasePage {
 
     /* Locators */
-    public static final String ADD_NEW_PRODUCT_BTN_CSS = "a[href$='category_id=0&amp;app=catalog&amp;doc=edit_product']";
+    public static final String ADD_NEW_PRODUCT_BTN_CSS = "a[href$='doc=edit_product']";
 
     public AdminCatalogPage() {
         url = "/admin/?app=catalog&doc=catalog";

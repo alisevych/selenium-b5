@@ -13,20 +13,23 @@ public class Dropdown {
     public By selectedLoc;
     public By expandLoc;
     public By inputLoc;
+    public WebDriver driver;
 
-    public Dropdown(By rootLoc) {
+    public Dropdown(WebDriver driver, By rootLoc) {
+        this.driver = driver;
         this.selectedLoc = rootLoc;
         this.expandLoc = rootLoc;
         this.inputLoc = rootLoc;
     }
 
-    public Dropdown(By selectedLoc, By expandLoc, By inputLoc) {
+    public Dropdown(WebDriver driver, By selectedLoc, By expandLoc, By inputLoc) {
+        this.driver = driver;
         this.selectedLoc = selectedLoc;
         this.expandLoc = expandLoc;
         this.inputLoc = inputLoc;
     }
 
-    public void select(WebDriverWait wait, WebDriver driver, String value){
+    public void select(String value){
         WebElement selected = getUniqueElement(driver, selectedLoc);
         if (selected.getText().equals(value))
             return;

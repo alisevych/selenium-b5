@@ -17,6 +17,11 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 
 public class ElementHelper {
 
+    /* Attributes */
+    public static final String VALUE_ATTRIBUTE = "value";
+    public static final String CHECKED_ATTRIBUTE = "checked";
+    public static final String TRUE_VALUE = "true";
+
     /* CSS Values */
     public static final String CSS_COLOR = "color";
     public static String COLORS_NUMBERS_PATTERN = "(\\d+)";

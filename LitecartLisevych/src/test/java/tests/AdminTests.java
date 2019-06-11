@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import site.data.Products;
+import site.entities.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +135,7 @@ public class AdminTests extends WebInit {
         adminHomePage.clickCoreLinkByText(CATALOG_LINK_TEXT);
         adminCatalogPage.checkOpened();
         adminCatalogPage.clickAddNewProductBtn();
-
+        Product newProduct = new Product(Products.randomProduct);
+        adminAddNewProductPage.fillGeneralTab(newProduct);
     }
 }

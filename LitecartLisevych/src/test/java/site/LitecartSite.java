@@ -11,6 +11,7 @@ public class LitecartSite {
     public static AdminGeoZonesPage adminGeoZonesPage = new AdminGeoZonesPage();
     public static AdminEditGeoZonePage adminEditGeoZonePage = new AdminEditGeoZonePage();
     public static AdminCatalogPage adminCatalogPage = new AdminCatalogPage();
+    public static AdminAddNewProductPage adminAddNewProductPage = new AdminAddNewProductPage();
 
     /* Online Store pages */
     public static MainPage mainPage = new MainPage();

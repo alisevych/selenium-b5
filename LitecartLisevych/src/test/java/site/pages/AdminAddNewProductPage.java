@@ -1,7 +1,13 @@
 package site.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import site.customE.Dropdown;
+import site.customE.RadioButtons;
+import site.entities.Product;
+
+import static helpers.ElementHelper.getUniqueElement;
+import static helpers.ElementHelper.getUniqueElementInBlock;
 
 public class AdminAddNewProductPage extends BasePage {
 
@@ -12,11 +18,10 @@ public class AdminAddNewProductPage extends BasePage {
 
     /* General Tab */
     public static final String GENERAL_TAB_CSS = " #tab-general";
+    public static final String STATUS_RB_LABEL_XPATH = "//*[@name='status']/..";
     public static final String NAME_INPUT_CSS = " [name='name[en]']";
     public static final String CODE_INPUT_CSS = " [name=code]";
     public static final String DEFAULT_CATEGORY_DD_SELECTED_CSS = " [name=default_category_id]";
-    public static final Dropdown defaultCategoryDropdown = new Dropdown(
-            By.cssSelector(GENERAL_TAB_CSS + DEFAULT_CATEGORY_DD_SELECTED_CSS));
     public static final String GENDER_FEMALE_CHECKBOX_CSS = " [type=checkbox][value='1-2']";
     public static final String GENDER_MALE_CHECKBOX_CSS = " [type=checkbox][value='1-1']";
     public static final String GENDER_UNISEX_CHECKBOX_CSS = " [type=checkbox][value='1-3']";
@@ -45,6 +50,18 @@ public class AdminAddNewProductPage extends BasePage {
     public AdminAddNewProductPage() {
         url = "app=catalog&doc=edit_product";
         title = "Add New Product";
+    }
+
+    public void fillGeneralTab (Product product){
+        WebElement generalTabForm = getUniqueElement(driver , By.cssSelector(GENERAL_TAB_CSS));
+        /* find all * elements inside General Tab Form */
+        WebElement nameInput = getUniqueElementInBlock(generalTabForm,
+                By.cssSelector(NAME_INPUT_CSS));
+        RadioButtons statusRadioButtons = new RadioButtons( driver,
+                By.xpath(STATUS_RB_LABEL_XPATH));
+        Dropdown defaultCategoryDropdown = new Dropdown( driver,
+                By.cssSelector(GENERAL_TAB_CSS + DEFAULT_CATEGORY_DD_SELECTED_CSS));
+        statusRadioButtons.select(product.status);
     }
 
 }
