@@ -2,9 +2,12 @@ package site.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import site.customE.CheckboxList;
 import site.customE.Dropdown;
 import site.customE.RadioButtons;
 import site.entities.Product;
+
+import java.util.List;
 
 import static helpers.ElementHelper.getUniqueElement;
 import static helpers.ElementHelper.getUniqueElementInBlock;
@@ -21,6 +24,8 @@ public class AdminAddNewProductPage extends BasePage {
     public static final String STATUS_RB_LABEL_XPATH = "//*[@name='status']/..";
     public static final String NAME_INPUT_CSS = " [name='name[en]']";
     public static final String CODE_INPUT_CSS = " [name=code]";
+    public static final String CATEGORIES_CHECKBOXES_XPATH = "//input[@name='categories[]']";
+    public static final String CATEGORIES_LABELS_XPATH = "//input[@name='categories[]']/../../td[2]";
     public static final String DEFAULT_CATEGORY_DD_SELECTED_CSS = " [name=default_category_id]";
     public static final String GENDER_FEMALE_CHECKBOX_CSS = " [type=checkbox][value='1-2']";
     public static final String GENDER_MALE_CHECKBOX_CSS = " [type=checkbox][value='1-1']";
@@ -59,9 +64,13 @@ public class AdminAddNewProductPage extends BasePage {
                 By.cssSelector(NAME_INPUT_CSS));
         RadioButtons statusRadioButtons = new RadioButtons( driver,
                 By.xpath(STATUS_RB_LABEL_XPATH));
+        CheckboxList categoriesCheckboxList = new CheckboxList(driver,
+                By.xpath(CATEGORIES_CHECKBOXES_XPATH),
+                By.xpath(CATEGORIES_LABELS_XPATH));
         Dropdown defaultCategoryDropdown = new Dropdown( driver,
                 By.cssSelector(GENERAL_TAB_CSS + DEFAULT_CATEGORY_DD_SELECTED_CSS));
         statusRadioButtons.select(product.status);
+        categoriesCheckboxList.checkByLabelText(product.categories);
     }
 
 }

@@ -135,7 +135,7 @@ public class AdminTests extends WebInit {
         adminHomePage.clickCoreLinkByText(CATALOG_LINK_TEXT);
         adminCatalogPage.checkOpened();
         adminCatalogPage.clickAddNewProductBtn();
-        Product newProduct = new Product(Products.randomProduct);
-        adminAddNewProductPage.fillGeneralTab(newProduct);
+        Product newDucks = new Product(Products.ducksM);
+        adminAddNewProductPage.fillGeneralTab(newDucks);
     }
 }
