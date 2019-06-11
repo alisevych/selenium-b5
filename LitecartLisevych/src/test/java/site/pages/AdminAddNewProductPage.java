@@ -69,8 +69,10 @@ public class AdminAddNewProductPage extends BasePage {
                 By.xpath(CATEGORIES_LABELS_XPATH));
         Dropdown defaultCategoryDropdown = new Dropdown( driver,
                 By.cssSelector(GENERAL_TAB_CSS + DEFAULT_CATEGORY_DD_SELECTED_CSS));
+        /* set values from product */
         statusRadioButtons.select(product.status);
         categoriesCheckboxList.checkByLabelText(product.categories);
+        defaultCategoryDropdown.select(product.defaultCategory);
     }
 
 }

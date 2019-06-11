@@ -17,8 +17,9 @@ public class Products {
     public static final String MANDARINE_NAME = "Ducks mandarin" + UNIQUE_ID;
     public static final String MANDARINE_CODE = UNIQUE_ID;
     public static final String MANDARINE_STATUS = "Enabled";
-    public static final List<String> MANDARINE_CATEGORIES = Arrays.asList( "Subcategory", "Rubber Ducks");
+    public static final List<String> MANDARINE_CATEGORIES = Arrays.asList( "Rubber Ducks", "Subcategory");
 
-    public static Product ducksM = new Product( MANDARINE_NAME, MANDARINE_CODE, MANDARINE_STATUS, MANDARINE_CATEGORIES);
+    public static Product ducksM = new Product( MANDARINE_NAME, MANDARINE_CODE, MANDARINE_STATUS,
+            MANDARINE_CATEGORIES, MANDARINE_CATEGORIES.get(0));
 
 }

@@ -32,11 +32,13 @@ public class Product {
     public BigDecimal priceEUR;
     public BigDecimal priceTaxEUR;
 
-    public Product(String name, String code, String status, List<String> categories){
+    public Product(String name, String code, String status,
+                   List<String> categories, String defaultCategory){
         this.name = name;
         this.code = code;
         this.status = status;
         this.categories = categories;
+        this.defaultCategory = defaultCategory;
     }
 
     public Product(Product initialProduct){
@@ -44,6 +46,7 @@ public class Product {
         this.code = initialProduct.code;
         this.status = initialProduct.status;
         this.categories = initialProduct.categories;
+        this.defaultCategory = initialProduct.defaultCategory;
     }
 
 }
