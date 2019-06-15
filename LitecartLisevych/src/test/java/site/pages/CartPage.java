@@ -8,11 +8,15 @@ import java.util.List;
 
 import static helpers.ElementHelper.getUniqueElement;
 import static helpers.ElementHelper.getUniqueElementInBlock;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class CartPage extends BasePage {
 
     public static final String ITEMS_LIST_CSS = " #box-checkout-cart .items li";
+    /*Item block */
     public static final String REMOVE_BTN_CSS = " [name=remove_cart_item]";
+    /* Order Table */
+    public static final String ORDER_TABLE_CSS = " #order_confirmation-wrapper table";
 
     public CartPage() {
         url = "/checkout";
@@ -28,6 +32,16 @@ public class CartPage extends BasePage {
     }
 
     public void removeItem(WebElement item){
-        getUniqueElementInBlock(item, By.cssSelector(REMOVE_BTN_CSS)).click();
+        WebElement orderTable = getOrderTable();
+        WebElement removeButton = getUniqueElementInBlock(item, By.cssSelector(REMOVE_BTN_CSS));
+        driverWait.until(visibilityOf(removeButton));
+        removeButton.click();
+        driverWait.until(stalenessOf(orderTable));
+        getOrderTable(); // uses findElements() to wait for table
     }
+
+    public WebElement getOrderTable(){
+        return getUniqueElement(driver, By.cssSelector(ORDER_TABLE_CSS));
+    }
+
 }

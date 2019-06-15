@@ -14,6 +14,7 @@ public class CartTests extends WebInit {
     @Test
     public void checkAddAndRemoveProductInCart() {
         int numberOfProductsToAdd = 3;
+        String DEFAULT_SIZE = "Small";
         mainPage.open();
         List<WebElement> products = null;
         WebElement firstProduct = null;
@@ -21,6 +22,8 @@ public class CartTests extends WebInit {
             products = mainPage.getAllProductsList();
             firstProduct = products.get(FIRST_ELEMENT_IN_LIST);
             firstProduct.click();
+            if (productPage.sizeDroplist.isPresent(driver))
+                productPage.sizeDroplist.select(DEFAULT_SIZE, driver);
             productPage.addProductToCart();
             productPage.waitQuantityInCartToBe(counter, driverWait);
             productPage.clickHomeLink();
@@ -28,10 +31,8 @@ public class CartTests extends WebInit {
         productPage.getCartCheckoutLink().click();
         WebElement item = cartPage.getFirstItem();
         while (item != null) {
-            item.getText();
+            System.out.println("[AUT] item text: " + item.getText());
             cartPage.removeItem(item);
-            // после каждого удаления подождать, пока внизу обновится таблица
-            //cartPage.waitOrderTable();
             item = cartPage.getFirstItem();
         }
     }

@@ -2,7 +2,7 @@ package site.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import site.customE.Dropdown;
+import site.elements.DDwithInput;
 import site.entities.User;
 
 import static helpers.ElementHelper.getUniqueElement;
@@ -22,17 +22,17 @@ public class CreateAccountPage extends BasePage {
     public static final String DESIRED_PASSWORD_INPUT_CSS = " [name=password]";
     public static final String CONFIRM_PASSWORD_INPUT_CSS = " [name=confirmed_password]";
     public static final String CREATE_ACCOUNT_BTN_CSS = " [name=create_account]";
-    /* Country  Dropdown */
+    /* Country  DDwithInput */
     public static final String COUNTRY_DD_SELECTED_CSS = " span[id^=select2-country_code]";
     public static final String COUNTRY_DD_EXPAND_CSS = " .select2-selection__arrow";
     public static final String COUNTRY_DD_INPUT_CSS = " .select2-search__field";
-    public static Dropdown countryDropdown = new Dropdown(By.cssSelector(COUNTRY_DD_SELECTED_CSS),
+    public static DDwithInput countryDropdown = new DDwithInput(By.cssSelector(COUNTRY_DD_SELECTED_CSS),
             By.cssSelector(COUNTRY_DD_EXPAND_CSS),
             By.cssSelector(COUNTRY_DD_INPUT_CSS));
-    /* Zone/State/Province Dropdown */
+    /* Zone/State/Province DDwithInput */
     public static final String STATE_DD_SELECTED_CSS = " input[name=zone_code]";
     public static final String STATE_DD_OPTIONS_CSS = " select[name=zone_code]";
-    public static Dropdown stateDropdown = new Dropdown(By.cssSelector(STATE_DD_SELECTED_CSS),
+    public static DDwithInput stateDropdown = new DDwithInput(By.cssSelector(STATE_DD_SELECTED_CSS),
             By.cssSelector(STATE_DD_OPTIONS_CSS),
             By.cssSelector(STATE_DD_OPTIONS_CSS));
 
@@ -75,9 +75,9 @@ public class CreateAccountPage extends BasePage {
         phoneInput.sendKeys(newUser.phone);
         desiredPasswordInput.sendKeys(newUser.desiredPassword);
         confirmPasswordInput.sendKeys(newUser.confirmPassword);
-        countryDropdown.select(driverWait, driver, newUser.country);
+        countryDropdown.select(driver, newUser.country);
         if (newUser.state != null)
-            stateDropdown.select(driverWait, driver, newUser.state);
+            stateDropdown.select(driver, newUser.state);
         /* click submit button */
         createAccountBtn.click();
     }
