@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static helpers.ElementHelper.getUniqueElement;
+import static helpers.ElementHelper.*;
 
 public class DropList {
 
@@ -43,7 +43,7 @@ public class DropList {
     }
 
     public boolean isPresent(WebDriver driver) {
-        if (getSelected(driver)==null)
+        if (driver.findElements(selectedLoc).isEmpty())
             return false;
         else
             return true;

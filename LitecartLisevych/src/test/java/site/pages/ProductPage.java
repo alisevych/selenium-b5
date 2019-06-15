@@ -17,13 +17,12 @@ public class ProductPage extends BasePage {
     public static final String PRODUCT_CAMPAIGN_PRICE_CSS = " .campaign-price";
     /* Buy now form*/
     public static final String BUY_NOW_FORM_CSS = " [name='buy_now_form']";
-    /* Size DropList locators */
-    public static final String PRODUCT_SIZE_SELECTED_CSS = " name='options[Size]'";
+    /* Size DropList */
+    public static final String PRODUCT_SIZE_SELECTED_CSS = " [name='options[Size]']";
     public static final String PRODUCT_SIZE_SUGGESTIONS_CSS = " option";
-    public DropList sizeDroplist = new DropList(
+    public DropList sizeDropList = new DropList(
             By.cssSelector(BUY_NOW_FORM_CSS + PRODUCT_SIZE_SELECTED_CSS),
             By.cssSelector(BUY_NOW_FORM_CSS + PRODUCT_SIZE_SUGGESTIONS_CSS));
-
     public static final String ADD_TO_CART_BTN_CSS = " [name=add_cart_product]";
 
     public ProductPage() {
@@ -50,7 +49,7 @@ public class ProductPage extends BasePage {
     }
 
     public void setProductSize(String size){
-        sizeDroplist.select(size, driver);
+        sizeDropList.select(size, driver);
     }
 
     public void addProductToCart(){

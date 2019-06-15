@@ -2,7 +2,6 @@ package site.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class CartPage extends BasePage {
 
     public WebElement getFirstItem(){
         List<WebElement> items =  driver.findElements(By.cssSelector(ITEMS_LIST_CSS));
-        if (items == null)
+        if (items.isEmpty())
             return null;
         else
             return items.get(0);
@@ -37,11 +36,9 @@ public class CartPage extends BasePage {
         driverWait.until(visibilityOf(removeButton));
         removeButton.click();
         driverWait.until(stalenessOf(orderTable));
-        getOrderTable(); // uses findElements() to wait for table
     }
 
     public WebElement getOrderTable(){
         return getUniqueElement(driver, By.cssSelector(ORDER_TABLE_CSS));
     }
-
 }
