@@ -15,4 +15,5 @@ public class LitecartSite {
     public static MainPage mainPage = new MainPage();
     public static ProductPage productPage = new ProductPage();
     public static CreateAccountPage createAccountPage = new CreateAccountPage();
+    public static CartPage cartPage = new CartPage();
 }
