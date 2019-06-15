@@ -130,12 +130,13 @@ public class AdminTests extends WebInit {
     /* Product tests */
     @Test // Task 12
     public void addNewProductTest() {
+        Product newDucks = new Product(Products.ducksM);
         adminHomePage.open();
         adminHomePage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
         adminHomePage.clickCoreLinkByText(CATALOG_LINK_TEXT);
         adminCatalogPage.checkOpened();
         adminCatalogPage.clickAddNewProductBtn();
-        Product newDucks = new Product(Products.ducksM);
         adminAddNewProductPage.fillGeneralTab(newDucks);
+
     }
 }

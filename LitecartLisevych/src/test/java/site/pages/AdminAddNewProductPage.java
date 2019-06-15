@@ -1,16 +1,14 @@
 package site.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import site.customE.CheckboxList;
-import site.customE.Dropdown;
-import site.customE.RadioButtons;
+import site.elements.CheckboxList;
+import site.elements.DropList;
+import site.elements.RadioButtons;
 import site.entities.Product;
 
-import java.util.List;
-
-import static helpers.ElementHelper.getUniqueElement;
-import static helpers.ElementHelper.getUniqueElementInBlock;
+import static helpers.ElementHelper.*;
 
 public class AdminAddNewProductPage extends BasePage {
 
@@ -27,11 +25,11 @@ public class AdminAddNewProductPage extends BasePage {
     public static final String CATEGORIES_CHECKBOXES_XPATH = "//input[@name='categories[]']";
     public static final String CATEGORIES_LABELS_XPATH = "//input[@name='categories[]']/../../td[2]";
     public static final String DEFAULT_CATEGORY_DD_SELECTED_CSS = " [name=default_category_id]";
-    public static final String GENDER_FEMALE_CHECKBOX_CSS = " [type=checkbox][value='1-2']";
-    public static final String GENDER_MALE_CHECKBOX_CSS = " [type=checkbox][value='1-1']";
-    public static final String GENDER_UNISEX_CHECKBOX_CSS = " [type=checkbox][value='1-3']";
+    public static final String DEFAULT_CATEGORY_DD_SUGGESTIONS_CSS = " [name=default_category_id]>option";
+    public static final String GROUPS_CHECKBOXES_XPATH = "//input[@name='product_groups[]']";
+    public static final String GROUPS_LABELS_XPATH = "//input[@name='product_groups[]']/../../td[2]";
     public static final String QUANTITY_INPUT_CSS = " [name=quantity]";
-    public static final String CHOOSE_FILE_BTN_CSS = " [name='new_images[]']";
+    public static final String IMAGE_INPUT_CSS = " [name='new_images[]']";
     public static final String DATE_VALID_FROM_INPUT_CSS = " [name=date_valid_from]";
     public static final String DATE_VALID_TO_INPUT_CSS = " [name=date_valid_to]";
 
@@ -67,12 +65,23 @@ public class AdminAddNewProductPage extends BasePage {
         CheckboxList categoriesCheckboxList = new CheckboxList(driver,
                 By.xpath(CATEGORIES_CHECKBOXES_XPATH),
                 By.xpath(CATEGORIES_LABELS_XPATH));
-        Dropdown defaultCategoryDropdown = new Dropdown( driver,
-                By.cssSelector(GENERAL_TAB_CSS + DEFAULT_CATEGORY_DD_SELECTED_CSS));
+        DropList defaultCategoryDropdown = new DropList( driver,
+                By.cssSelector(GENERAL_TAB_CSS + DEFAULT_CATEGORY_DD_SELECTED_CSS),
+                By.cssSelector(GENERAL_TAB_CSS + DEFAULT_CATEGORY_DD_SUGGESTIONS_CSS));
+        CheckboxList groupsCheckboxList = new CheckboxList(driver,
+                By.xpath(GROUPS_CHECKBOXES_XPATH),
+                By.xpath(GROUPS_LABELS_XPATH));
+        WebElement quantityInput = getUniqueElementInBlock(generalTabForm,
+                By.cssSelector(QUANTITY_INPUT_CSS));
+        WebElement imageInput = getUniqueElementInBlock(generalTabForm,
+                By.cssSelector(IMAGE_INPUT_CSS));
         /* set values from product */
         statusRadioButtons.select(product.status);
         categoriesCheckboxList.checkByLabelText(product.categories);
         defaultCategoryDropdown.select(product.defaultCategory);
+        groupsCheckboxList.checkByLabelText(product.productGroups);
+        quantityInput.sendKeys(String.valueOf(product.quantity));
+        imageInput.sendKeys(product.imageFilePath + Keys.ENTER);
     }
 
 }

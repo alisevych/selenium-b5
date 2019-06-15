@@ -12,26 +12,28 @@ public class DropList {
 
     public By selectedLoc;
     public By suggestionLoc;
+    public WebDriver driver;
 
-    public DropList(By selectedLoc, By suggestionLoc) {
+    public DropList(WebDriver driver, By selectedLoc, By suggestionLoc) {
         this.selectedLoc = selectedLoc;
         this.suggestionLoc = suggestionLoc;
+        this.driver = driver;
     }
 
-    public List<WebElement> getSuggestions(WebDriver driver) {
+    public List<WebElement> getSuggestions() {
         return driver.findElements(suggestionLoc);
     }
 
-    public WebElement getSelected(WebDriver driver){
+    public WebElement getSelected(){
         return getUniqueElement(driver, selectedLoc);
     }
 
-    public void select(String value, WebDriver driver){
-        WebElement selected = getSelected(driver);
+    public void select(String value){
+        WebElement selected = getSelected();
         if (selected.getText().equals(value))
             return;
         selected.click();
-        List<WebElement> suggestions = getSuggestions(driver);
+        List<WebElement> suggestions = getSuggestions();
         for (WebElement suggestion : suggestions) {
             if (suggestion.getText().equals(value)) {
                 suggestion.click();
@@ -42,7 +44,7 @@ public class DropList {
                 value + " is not found in DropList.");
     }
 
-    public boolean isPresent(WebDriver driver) {
+    public boolean isPresent() {
         if (driver.findElements(selectedLoc).isEmpty())
             return false;
         else

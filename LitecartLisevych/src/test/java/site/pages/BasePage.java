@@ -43,15 +43,17 @@ public class BasePage extends WebInit {
     }
 
     /* Cart actions*/
-    public void waitQuantityInCartToBe(int expectedValue, WebDriverWait wait){
-        wait.until(ExpectedConditions.textToBe(
+    public void waitQuantityInCartToBe(int expectedValue){
+        driverWait.until(ExpectedConditions.textToBe(
                 By.cssSelector(CART_BLOCK_CSS + CART_QUANTITY_CSS),
                 String.valueOf(expectedValue)));
     }
 
-    public WebElement getCartCheckoutLink(){
+    public void clickCartCheckoutLink(){
         WebElement cartBlock = getUniqueElement(driver, By.cssSelector(CART_BLOCK_CSS));
-        return getUniqueElementInBlock(cartBlock, By.cssSelector(CART_CHECKOUT_LINK_CSS));
+        WebElement checkoutLink = getUniqueElementInBlock(cartBlock,
+                By.cssSelector(CART_CHECKOUT_LINK_CSS));
+        checkoutLink.click();
     }
 
 }

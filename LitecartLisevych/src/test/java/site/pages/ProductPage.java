@@ -20,14 +20,15 @@ public class ProductPage extends BasePage {
     /* Size DropList */
     public static final String PRODUCT_SIZE_SELECTED_CSS = " [name='options[Size]']";
     public static final String PRODUCT_SIZE_SUGGESTIONS_CSS = " option";
-    public DropList sizeDropList = new DropList(
-            By.cssSelector(BUY_NOW_FORM_CSS + PRODUCT_SIZE_SELECTED_CSS),
-            By.cssSelector(BUY_NOW_FORM_CSS + PRODUCT_SIZE_SUGGESTIONS_CSS));
+    public static DropList sizeDropList;
     public static final String ADD_TO_CART_BTN_CSS = " [name=add_cart_product]";
 
     public ProductPage() {
         url = "/";
         title = "";
+        sizeDropList = new DropList( driver,
+                By.cssSelector(BUY_NOW_FORM_CSS + PRODUCT_SIZE_SELECTED_CSS),
+                By.cssSelector(BUY_NOW_FORM_CSS + PRODUCT_SIZE_SUGGESTIONS_CSS));
     }
 
     @Override
@@ -48,8 +49,9 @@ public class ProductPage extends BasePage {
         return driver.findElement(By.cssSelector(PRODUCT_BLOCK_CSS + PRODUCT_CAMPAIGN_PRICE_CSS));
     }
 
-    public void setProductSize(String size){
-        sizeDropList.select(size, driver);
+    public void selectProductSize(String size)
+    {
+        sizeDropList.select(size);
     }
 
     public void addProductToCart(){

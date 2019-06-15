@@ -15,11 +15,12 @@ public class DDwithInput {
     public By inputLoc;
     public WebDriver driver;
 
-    public DDwithInput(WebDriver driver, By rootLoc) {
+    public DDwithInput(WebDriver driver, By selectedLoc,
+                       By expandLoc, By inputLoc) {
         this.driver = driver;
-        this.selectedLoc = rootLoc;
-        this.expandLoc = rootLoc;
-        this.inputLoc = rootLoc;
+        this.selectedLoc = selectedLoc;
+        this.expandLoc = expandLoc;
+        this.inputLoc = inputLoc;
     }
 
     public void select(String value){

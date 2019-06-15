@@ -22,13 +22,13 @@ public class CartTests extends WebInit {
             products = mainPage.getAllProductsList();
             firstProduct = products.get(FIRST_ELEMENT_IN_LIST);
             firstProduct.click();
-            if (productPage.sizeDropList.isPresent(driver))
-                productPage.sizeDropList.select(DEFAULT_SIZE, driver);
+            if (productPage.sizeDropList.isPresent())
+                productPage.sizeDropList.select(DEFAULT_SIZE);
             productPage.addProductToCart();
-            productPage.waitQuantityInCartToBe(counter, driverWait);
+            productPage.waitQuantityInCartToBe(counter);
             productPage.clickHomeLink();
         }
-        productPage.getCartCheckoutLink().click();
+        productPage.clickCartCheckoutLink();
         WebElement item = cartPage.getFirstItem();
         while (item != null) {
             cartPage.removeItem(item);

@@ -58,11 +58,11 @@ public class CreateAccountPage extends BasePage {
                 By.cssSelector(CONFIRM_PASSWORD_INPUT_CSS));
         WebElement createAccountBtn = getUniqueElementInBlock(createAccountForm,
                 By.cssSelector(CREATE_ACCOUNT_BTN_CSS));
-        Dropdown countryDDwInput = new DDwithInput( driver,
+        DDwithInput countryDDwInput = new DDwithInput( driver,
                 By.cssSelector(COUNTRY_DD_SELECTED_CSS),
                 By.cssSelector(COUNTRY_DD_EXPAND_CSS),
                 By.cssSelector(COUNTRY_DD_INPUT_CSS));
-        Dropdown stateDDwInput = new DDwithInput( driver,
+        DDwithInput stateDDwInput = new DDwithInput( driver,
                 By.cssSelector(STATE_DD_SELECTED_CSS),
                 By.cssSelector(STATE_DD_OPTIONS_CSS),
                 By.cssSelector(STATE_DD_OPTIONS_CSS));
