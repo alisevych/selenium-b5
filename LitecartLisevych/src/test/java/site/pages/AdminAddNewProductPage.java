@@ -29,7 +29,7 @@ public class AdminAddNewProductPage extends BasePage {
     public static final String GROUPS_CHECKBOXES_XPATH = "//input[@name='product_groups[]']";
     public static final String GROUPS_LABELS_XPATH = "//input[@name='product_groups[]']/../../td[2]";
     public static final String QUANTITY_INPUT_CSS = " [name=quantity]";
-    public static final String IMAGE_INPUT_CSS = " [name='new_images[]']";
+    public static final String IMAGE_INPUT_CSS = " input[name='new_images[]']";
     public static final String DATE_VALID_FROM_INPUT_CSS = " [name=date_valid_from]";
     public static final String DATE_VALID_TO_INPUT_CSS = " [name=date_valid_to]";
 
@@ -80,6 +80,7 @@ public class AdminAddNewProductPage extends BasePage {
         categoriesCheckboxList.checkByLabelText(product.categories);
         defaultCategoryDropdown.select(product.defaultCategory);
         groupsCheckboxList.checkByLabelText(product.productGroups);
+        quantityInput.clear();
         quantityInput.sendKeys(String.valueOf(product.quantity));
         imageInput.sendKeys(product.imageFilePath + Keys.ENTER);
     }
