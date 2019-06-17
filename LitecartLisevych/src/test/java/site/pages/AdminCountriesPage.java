@@ -10,6 +10,7 @@ public class AdminCountriesPage extends BasePage {
 
     /* Locators */
     public static final String COUNTRIES_TABLE_CSS = "table.dataTable";
+
     public static final String NAME_HEADER_TEXT = "Name";
     public static final String ZONES_HEADER_TEXT = "Zones";
 
