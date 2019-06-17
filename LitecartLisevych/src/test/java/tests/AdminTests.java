@@ -127,7 +127,7 @@ public class AdminTests extends WebInit {
         }
     }
 
-    /* Product tests */
+    /* Catalog tests */
     @Test // Task 12
     public void addNewProductTest() {
         Product newDucks = new Product(Products.ducksM);
@@ -137,6 +137,13 @@ public class AdminTests extends WebInit {
         adminCatalogPage.checkOpened();
         adminCatalogPage.clickAddNewProductBtn();
         adminAddNewProductPage.fillGeneralTab(newDucks);
-
+        adminAddNewProductPage.switchToInformationTab();
+        adminAddNewProductPage.fillInformationTab(newDucks);
+        adminAddNewProductPage.switchToPricesTab();
+        adminAddNewProductPage.fillPricesTab(newDucks);
+        adminAddNewProductPage.clickSaveBtn();
+        adminCatalogPage.checkOpened();
+        WebElement productFound = adminCatalogPage.getProductByName(newDucks.name);
+        Assert.assertTrue(productFound.isEnabled());
     }
 }

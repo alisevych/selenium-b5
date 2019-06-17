@@ -29,6 +29,9 @@ public class DropList {
     }
 
     public void select(String value){
+        if (value == null)
+            throw new RuntimeException("[AUT-ERROR] Value for DropList.select() is not defined. " +
+                    "Check test data.");
         WebElement selected = getSelected();
         if (selected.getText().equals(value))
             return;
