@@ -1,13 +1,11 @@
 package helpers;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.Dimension;
 
 import static tests.WebInit.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -38,6 +36,9 @@ public class ElementHelper {
     public static final int SIZE_ONE = 1;
     public static final int FIRST_ELEMENT_IN_LIST = 0;
     public static final Integer ZERO_VALUE = 0;
+
+    /* Keys strikes */
+    public static final String CLEAR_KEYS = Keys.CONTROL + "a" + Keys.DELETE;
 
     public static WebElement getUniqueElement(WebDriver driver, By locator){
         List<WebElement> elements = driver.findElements(locator);
@@ -158,5 +159,27 @@ public class ElementHelper {
             }
         System.out.println("[AL] Size 2 bigger than size 1: FALSE.");
         return false;
+    }
+
+    /* File input */
+    public static void unhide(WebDriver driver, WebElement element) {
+        String script = "arguments[0].style.opacity=1;"
+                + "arguments[0].style['transform']='translate(0px, 0px) scale(1)';"
+                + "arguments[0].style['MozTransform']='translate(0px, 0px) scale(1)';"
+                + "arguments[0].style['WebkitTransform']='translate(0px, 0px) scale(1)';"
+                + "arguments[0].style['msTransform']='translate(0px, 0px) scale(1)';"
+                + "arguments[0].style['OTransform']='translate(0px, 0px) scale(1)';"
+                + "return true;";
+        ((JavascriptExecutor) driver).executeScript(script, element);
+    }
+
+    public static void attachFile(WebDriver driver, By locator, String file) {
+        WebElement input = driver.findElement(locator);
+        unhide(driver, input);
+        input.sendKeys(file);
+    }
+
+    public static String getAbsolutePathOfFile(File file){
+        return file.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
     }
 }

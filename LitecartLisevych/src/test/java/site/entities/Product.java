@@ -4,6 +4,8 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static helpers.ElementHelper.*;
+
 public class Product {
 
     /* General Tab */
@@ -19,6 +21,8 @@ public class Product {
     public String dateValidTo;
 
     /* Information Tab */
+    public String manufacturer;
+    public String supplier;
     public String keywords;
     public String shortDescription;
     public String description;
@@ -36,7 +40,15 @@ public class Product {
     public Product(String name, String code, String status,
                    List<String> categories, String defaultCategory,
                    List<String> productGroups, int quantity,
-                   String imageFileName){
+                   String imageFileName,
+                   String dateValidFrom, String dateValidTo,
+                   String manufacturer, String supplier,
+                   String keywords, String shortDescription,
+                   String description, String headTitle,
+                   String metaDescription,
+                   BigDecimal purchasePrice, String purchasePriceCurrency,
+                   BigDecimal priceUSD, BigDecimal priceEUR
+    ){
         this.name = name;
         this.code = code;
         this.status = status;
@@ -44,8 +56,22 @@ public class Product {
         this.defaultCategory = defaultCategory;
         this.productGroups = productGroups;
         this.quantity = quantity;
-        File imageFile = new File(imageFileName);
-        this.imageFilePath = imageFile.getAbsolutePath();
+        this.imageFilePath = getAbsolutePathOfFile(new File(imageFileName));
+        this.dateValidFrom = dateValidFrom;
+        this.dateValidTo = dateValidTo;
+        /* information tab */
+        this.manufacturer = manufacturer;
+        this.supplier = supplier;
+        this.keywords = keywords;
+        this.shortDescription = shortDescription;
+        this.description = description;
+        this.headTitle = headTitle;
+        this.metaDescription = metaDescription;
+        /* prices tab */
+        this.purchasePrice = purchasePrice;
+        this.purchasePriceCurrency = purchasePriceCurrency;
+        this.priceUSD = priceUSD;
+        this.priceEUR = priceEUR;
     }
 
     public Product(Product initialProduct){
@@ -55,6 +81,23 @@ public class Product {
         this.categories = initialProduct.categories;
         this.defaultCategory = initialProduct.defaultCategory;
         this.productGroups = initialProduct.productGroups;
+        this.quantity = initialProduct.quantity;
+        this.imageFilePath = initialProduct.imageFilePath;
+        this.dateValidFrom = initialProduct.dateValidFrom;
+        this.dateValidTo = initialProduct.dateValidTo;
+        /* information tab */
+        this.manufacturer = initialProduct.manufacturer;
+        this.supplier = initialProduct.supplier;
+        this.keywords = initialProduct.keywords;
+        this.shortDescription = initialProduct.shortDescription;
+        this.description = initialProduct.description;
+        this.headTitle = initialProduct.headTitle;
+        this.metaDescription = initialProduct.metaDescription;
+        /* prices tab */
+        this.purchasePrice = initialProduct.purchasePrice;
+        this.purchasePriceCurrency = initialProduct.purchasePriceCurrency;
+        this.priceUSD = initialProduct.priceUSD;
+        this.priceEUR = initialProduct.priceEUR;
     }
 
 }
