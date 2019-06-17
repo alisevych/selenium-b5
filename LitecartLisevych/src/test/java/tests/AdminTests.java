@@ -4,12 +4,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import site.data.Products;
 import site.entities.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
+import static helpers.ElementHelper.*;
 import static site.LitecartSite.*;
 import static site.pages.AdminHomePage.*;
 
@@ -93,6 +97,30 @@ public class AdminTests extends WebInit {
             List<WebElement> countryZones = adminEditCountryPage.getZoneNames();
             verifyListOfWebElementsIsSortedAlphabetically(countryZones);
             adminCountriesPage.open();
+        }
+    }
+
+    @Test // Task 14
+    public void linksFromEditCountryPageAreOpenedTest(){
+        adminCountriesPage.open();
+        adminHomePage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
+        List<WebElement> countryNames = adminCountriesPage.getCountryNames();
+        Random random = new Random();
+        int countryNumber = random.nextInt(countryNames.size());
+        String countryName = countryNames.get(countryNumber).getText();
+        System.out.println("[AUT] Country with name + " + countryName + " will be opened for edit.");
+        clickLinkInsideElement(countryNames.get(countryNumber));
+        adminEditCountryPage.checkOpened();
+        List<WebElement> faLinks = adminEditCountryPage.getFaLinks();
+        String mainWindow = driver.getWindowHandle();
+        for (WebElement faLink : faLinks) {
+            Set<String> oldWindows = driver.getWindowHandles();
+            faLink.click();
+            String newWindow = driverWait.until(d -> getNewWindowHandle(d, oldWindows));
+            driver.switchTo().window(newWindow);
+            System.out.println("[AUT] Window with title " + driver.getTitle() + " is opened.");
+            driver.close();
+            driver.switchTo().window(mainWindow);
         }
     }
 
