@@ -1,4 +1,4 @@
-package site.customE;
+package site.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -8,21 +8,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static helpers.ElementHelper.*;
 
-public class Dropdown {
+public class DDwithInput {
 
     public By selectedLoc;
     public By expandLoc;
     public By inputLoc;
     public WebDriver driver;
 
-    public Dropdown(WebDriver driver, By rootLoc) {
-        this.driver = driver;
-        this.selectedLoc = rootLoc;
-        this.expandLoc = rootLoc;
-        this.inputLoc = rootLoc;
-    }
-
-    public Dropdown(WebDriver driver, By selectedLoc, By expandLoc, By inputLoc) {
+    public DDwithInput(WebDriver driver, By selectedLoc,
+                       By expandLoc, By inputLoc) {
         this.driver = driver;
         this.selectedLoc = selectedLoc;
         this.expandLoc = expandLoc;
