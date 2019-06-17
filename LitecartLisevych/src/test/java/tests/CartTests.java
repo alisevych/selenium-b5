@@ -10,14 +10,14 @@ import static site.LitecartSite.*;
 
 public class CartTests extends WebInit {
 
-    /* Test checks that product is added to the Cart. */
+    /* Task 13. */
     @Test
     public void addAndRemoveProductsInCartTest() {
         int numberOfProductsToAdd = 3;
         String DEFAULT_SIZE = "Small";
         mainPage.open();
-        List<WebElement> products = null;
-        WebElement firstProduct = null;
+        List<WebElement> products;
+        WebElement firstProduct;
         for (int counter = 1; counter <= numberOfProductsToAdd; counter++) {
             products = mainPage.getAllProductsList();
             firstProduct = products.get(FIRST_ELEMENT_IN_LIST);
