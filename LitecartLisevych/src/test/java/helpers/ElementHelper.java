@@ -3,11 +3,13 @@ package helpers;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static tests.AdminTests.LINK_TAG_NAME;
 import static tests.WebInit.*;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,6 +74,10 @@ public class ElementHelper {
         }
         throw new RuntimeException( "[AUT_ERROR] Element with getText() equals to "+ text +
                 " is not found in list.");
+    }
+
+    public static void clickLinkInsideElement( WebElement parentElement) {
+        parentElement.findElement(By.tagName(LINK_TAG_NAME)).click();
     }
 
     /* Tables */
@@ -181,5 +187,21 @@ public class ElementHelper {
 
     public static String getAbsolutePathOfFile(File file){
         return file.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
+    }
+
+    /* Windows */
+
+    public static String getNewWindowHandle(WebDriver driver, Set<String> oldWindows){
+        Set<String> newWindows = driver.getWindowHandles();
+        if (oldWindows.containsAll(newWindows))
+            return null;
+        else {
+            newWindows.removeAll(oldWindows);
+            if (newWindows.size() == 1)
+                return newWindows.iterator().next();
+            else
+                throw new RuntimeException("[AUT-ERROR] " + newWindows.size() + " new windows are opened." +
+                        " 1 is expected.");
+        }
     }
 }
