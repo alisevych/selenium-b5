@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static tests.WebInit.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -176,5 +177,9 @@ public class ElementHelper {
         WebElement input = driver.findElement(locator);
         unhide(driver, input);
         input.sendKeys(file);
+    }
+
+    public static String getAbsolutePathOfFile(File file){
+        return file.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
     }
 }

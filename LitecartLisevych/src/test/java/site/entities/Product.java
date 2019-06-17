@@ -4,6 +4,8 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static helpers.ElementHelper.*;
+
 public class Product {
 
     /* General Tab */
@@ -54,7 +56,7 @@ public class Product {
         this.defaultCategory = defaultCategory;
         this.productGroups = productGroups;
         this.quantity = quantity;
-        this.imageFilePath = new File(imageFileName).getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
+        this.imageFilePath = getAbsolutePathOfFile(new File(imageFileName));
         this.dateValidFrom = dateValidFrom;
         this.dateValidTo = dateValidTo;
         /* information tab */
