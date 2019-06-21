@@ -1,6 +1,7 @@
 package tests;
 
 import helpers.InputHelper;
+import helpers.MyListener;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,14 +12,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 
 public class WebInit {
 
-    private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
-    protected WebDriver driver;
+    private static ThreadLocal<EventFiringWebDriver> tlDriver = new ThreadLocal<>();
+    //protected WebDriver driver;
+    protected EventFiringWebDriver driver;
     protected WebDriverWait driverWait;
     protected static final int timeout = 10;
 
@@ -49,28 +52,29 @@ public class WebInit {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("start-maximized");
             capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-            driver = new ChromeDriver(capabilities);
+            driver = new EventFiringWebDriver( new ChromeDriver(capabilities));
         }
         if (browserName.equals(IE_NAME)) {
-            driver = new InternetExplorerDriver(capabilities);
+            driver = new EventFiringWebDriver(new InternetExplorerDriver(capabilities));
         }
         if (browserName.equals(FIREFOX_NAME)) {
-            driver = new FirefoxDriver();
+            driver = new EventFiringWebDriver(new FirefoxDriver());
         }
         if (browserName.equals(FIREFOX_OLD_NAME)) {
             FirefoxOptions ffOptions = new FirefoxOptions();
             ffOptions.setBinary(new FirefoxBinary(new File("c:\\Program Files\\Mozilla Firefox\\45.ESR\\firefox.exe")));
             capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, ffOptions);
-            driver = new FirefoxDriver(capabilities);
+            driver = new EventFiringWebDriver(new FirefoxDriver(capabilities));
         }
         if (browserName.equals(FIREFOX_NIGHTLY_NAME)) {
             FirefoxOptions ffOptions = new FirefoxOptions();
             ffOptions.setBinary(new FirefoxBinary(new File("c:\\Program Files\\Mozilla Firefox\\Nightly\\firefox.exe")));
-            driver = new FirefoxDriver(ffOptions);
+            driver = new EventFiringWebDriver(new FirefoxDriver(ffOptions));
         }
         if (driver == null)
             throw new RuntimeException("[AUT_ERROR] Browser name is not recognized. Driver is not initialized." +
                     "Browser name : " + browserName);
+        driver.register(new MyListener());
         //System.out.println("[AL] Capabilities::\n" + ((HasCapabilities) driver).getCapabilities());
         //driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         driverWait = new WebDriverWait(driver, timeout);
