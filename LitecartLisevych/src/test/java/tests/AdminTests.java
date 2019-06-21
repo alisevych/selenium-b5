@@ -1,10 +1,11 @@
 package tests;
 
+import helpers.BrowserHelper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import site.data.Products;
 import site.entities.Product;
 
@@ -164,14 +165,34 @@ public class AdminTests extends WebInit {
         adminHomePage.clickCoreLinkByText(CATALOG_LINK_TEXT);
         adminCatalogPage.checkOpened();
         adminCatalogPage.clickAddNewProductBtn();
-        adminAddNewProductPage.fillGeneralTab(newDucks);
-        adminAddNewProductPage.switchToInformationTab();
-        adminAddNewProductPage.fillInformationTab(newDucks);
-        adminAddNewProductPage.switchToPricesTab();
-        adminAddNewProductPage.fillPricesTab(newDucks);
-        adminAddNewProductPage.clickSaveBtn();
+        adminEditProductPage.fillGeneralTab(newDucks);
+        adminEditProductPage.switchToInformationTab();
+        adminEditProductPage.fillInformationTab(newDucks);
+        adminEditProductPage.switchToPricesTab();
+        adminEditProductPage.fillPricesTab(newDucks);
+        adminEditProductPage.clickSaveBtn();
         adminCatalogPage.checkOpened();
         WebElement productFound = adminCatalogPage.getProductByName(newDucks.name);
         Assert.assertTrue(productFound.isEnabled());
+    }
+
+    @Test // Task 17
+    public void checkBrowserLogMessagesOnProductPagesTest(){
+        adminCatalogPage.open();
+        adminHomePage.loginAsAdmin(ADMIN_USERNAME, ADMIN_PASSWORD);
+        adminCatalogPage.openAllCategories();
+        List<WebElement> products = adminCatalogPage.getProducts();
+        boolean areLogsPresent = false;
+        for (int iProduct = 0; iProduct< products.size(); iProduct++){
+            products.get(iProduct).click();
+            adminEditProductPage.checkOpened();
+            System.out.println("[AUT] Page to be checked : "
+                    + driver.getCurrentUrl());
+            if (BrowserHelper.arePresentBrowserLogs(driver) )
+                areLogsPresent = true;
+            driver.navigate().back();
+            products = adminCatalogPage.getProducts();
+        }
+        Assert.assertFalse(areLogsPresent);
     }
 }

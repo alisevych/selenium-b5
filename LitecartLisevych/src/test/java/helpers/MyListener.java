@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class MyListener extends AbstractWebDriverEventListener {
 
-    @Override
+/*    @Override
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
         System.out.println("[AUT] " + by);
     }
@@ -18,7 +18,7 @@ public class MyListener extends AbstractWebDriverEventListener {
     public void afterFindBy(By by, WebElement element, WebDriver driver) {
         System.out.println("[AUT] " + by + " found.");
     }
-
+*/
     @Override
     public void onException(Throwable throwable, WebDriver driver) {
         System.out.println("[AUT] " + throwable);

@@ -11,7 +11,7 @@ import site.entities.Product;
 
 import static helpers.ElementHelper.*;
 
-public class AdminAddNewProductPage extends BasePage {
+public class AdminEditProductPage extends BasePage {
 
     /* switch between tabs */
     public static final String GENERAL_TAB_SWITCH_CSS = " [href='#tab-general']";
@@ -59,9 +59,9 @@ public class AdminAddNewProductPage extends BasePage {
     public static final String PRICE_EUR = " [name='prices[EUR]']";
     public static final String PRICE_TAX_EUR = " [name='gross_prices[EUR]']";
 
-    public AdminAddNewProductPage() {
+    public AdminEditProductPage() {
         url = "app=catalog&doc=edit_product";
-        title = "Add New Product";
+        title = "Product";
     }
 
     public void clickGeneralTab(){
