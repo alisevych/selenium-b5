@@ -2,6 +2,7 @@ package site.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import site.entities.User;
 
 import java.util.List;
@@ -37,13 +38,33 @@ public class MainPage extends BasePage {
         title = "Online Store";
     }
 
-    public List<WebElement> getAllProductsList() {
-        return driver.findElements(By.cssSelector(ALL_PRODUCTS_CSS));
+    @FindBy(css = ALL_PRODUCTS_CSS)
+    public List<WebElement> allProducts;
+
+    @FindBy(css = CAMPAIGNS_BLOCK_CSS)
+    public WebElement campainsBlock;
+
+    @FindBy(css = LOGIN_FORM_CSS + NEW_CUSTOMERS_LINK_CSS)
+    public WebElement newCustomersLink;
+
+    @FindBy(css = ACCOUNT_FORM_CSS + LOGOUT_LINK_CSS)
+    public WebElement logoutLink;
+
+    @FindBy(css = LOGIN_FORM_CSS + EMAIL_INPUT_CSS)
+    public WebElement emailInput;
+
+    @FindBy(css = LOGIN_FORM_CSS + PASSWORD_INPUT_CSS)
+    public WebElement passwordInput;
+
+    @FindBy(css = LOGIN_FORM_CSS + LOGIN_BTN_CSS)
+    public WebElement loginBtn;
+
+    public void clickFirstProductOnPage(){
+        allProducts.get(FIRST_ELEMENT_IN_LIST).click();
     }
 
     public List<WebElement> getProductsFromBlockCampaigns() {
-        WebElement block = getUniqueElement(driver , By.cssSelector(CAMPAIGNS_BLOCK_CSS));
-        return block.findElements(By.cssSelector(ALL_PRODUCTS_CSS));
+        return campainsBlock.findElements(By.cssSelector(ALL_PRODUCTS_CSS));
     }
 
     public List<WebElement> getStickersFromProduct(WebElement product) {
@@ -62,20 +83,13 @@ public class MainPage extends BasePage {
         return getUniqueElementInBlock(product, By.cssSelector(PRODUCT_CAMPAIGN_PRICE_CSS));
     }
 
-    public void clickNewCustomersLink(){
-        getUniqueElement(driver, By.cssSelector(LOGIN_FORM_CSS + NEW_CUSTOMERS_LINK_CSS)).click();
-    }
-
     public void logout() {
-        getUniqueElement(driver, By.cssSelector(ACCOUNT_FORM_CSS + LOGOUT_LINK_CSS)).click();
+        logoutLink.click();
     }
 
     public void loginAs(User user) {
-        getUniqueElement(driver, By.cssSelector(LOGIN_FORM_CSS + EMAIL_INPUT_CSS)).
-                sendKeys(user.email);
-        getUniqueElement(driver, By.cssSelector(LOGIN_FORM_CSS + PASSWORD_INPUT_CSS)).
-                sendKeys(user.desiredPassword);
-        getUniqueElement(driver, By.cssSelector(LOGIN_FORM_CSS + LOGIN_BTN_CSS)).
-                click();
+        emailInput.sendKeys(user.email);
+        passwordInput.sendKeys(user.desiredPassword);
+        loginBtn.click();
     }
 }

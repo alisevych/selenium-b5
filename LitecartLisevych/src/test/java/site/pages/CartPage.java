@@ -2,9 +2,11 @@ package site.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import static helpers.ElementHelper.FIRST_ELEMENT_IN_LIST;
 import static helpers.ElementHelper.getUniqueElement;
 import static helpers.ElementHelper.getUniqueElementInBlock;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
@@ -22,19 +24,24 @@ public class CartPage extends BasePage {
         title = "";
     }
 
+    @FindBy(css = ITEMS_LIST_CSS)
+    public List<WebElement> items;
+
+    @FindBy(css = REMOVE_BTN_CSS)
+    public List<WebElement> removeBtns;
+
     public WebElement getFirstItem(){
-        List<WebElement> items =  driver.findElements(By.cssSelector(ITEMS_LIST_CSS));
         if (items.isEmpty())
             return null;
         else
             return items.get(0);
     }
 
-    public void removeItem(WebElement item){
+    public void removeFirstItem(){
         WebElement orderTable = getOrderTable();
-        WebElement removeButton = getUniqueElementInBlock(item, By.cssSelector(REMOVE_BTN_CSS));
-        driverWait.until(visibilityOf(removeButton));
-        removeButton.click();
+        WebElement firstItemRemoveBtn = removeBtns.get(FIRST_ELEMENT_IN_LIST);
+        driverWait.until(visibilityOf(firstItemRemoveBtn));
+        firstItemRemoveBtn.click();
         driverWait.until(stalenessOf(orderTable));
     }
 

@@ -20,7 +20,7 @@ public class ProductTests extends WebInit {
         mainPage.open();
         int START_INDEX = 0;
         int iProduct = START_INDEX;
-        List<WebElement> products = mainPage.getAllProductsList();
+        List<WebElement> products = mainPage.allProducts;
         for (iProduct = START_INDEX ; iProduct < products.size(); iProduct++) {
             List<WebElement> stickers = mainPage.getStickersFromProduct(products.get(iProduct));
             Assert.assertEquals(stickers.size(), SIZE_ONE);
