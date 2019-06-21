@@ -3,6 +3,8 @@ package site.pages;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.WebInit;
@@ -25,6 +27,7 @@ public class BasePage extends WebInit {
 
     BasePage(){
         start();
+        PageFactory.initElements(driver,this );
     }
 
     public void open(){
@@ -37,20 +40,28 @@ public class BasePage extends WebInit {
         Assert.assertTrue(driver.getTitle().contains(title));
     }
 
+    @FindBy(css = HOME_LINK_CSS)
+    public WebElement homeLink;
+
+    @FindBy(css = CART_BLOCK_CSS )
+    public WebElement cartBlock;
+
+    @FindBy(css = CART_BLOCK_CSS + CART_QUANTITY_CSS)
+    public WebElement cartQuantityText;
+
     /* Site menu actions */
     public void clickHomeLink(){
-        getUniqueElement(driver, By.cssSelector(HOME_LINK_CSS)).click();
+        homeLink.click();
     }
 
     /* Cart actions*/
     public void waitQuantityInCartToBe(int expectedValue){
-        driverWait.until(ExpectedConditions.textToBe(
-                By.cssSelector(CART_BLOCK_CSS + CART_QUANTITY_CSS),
+        driverWait.until(ExpectedConditions.textToBePresentInElement(
+                cartQuantityText,
                 String.valueOf(expectedValue)));
     }
 
     public void clickCartCheckoutLink(){
-        WebElement cartBlock = getUniqueElement(driver, By.cssSelector(CART_BLOCK_CSS));
         WebElement checkoutLink = getUniqueElementInBlock(cartBlock,
                 By.cssSelector(CART_CHECKOUT_LINK_CSS));
         checkoutLink.click();

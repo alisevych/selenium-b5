@@ -2,6 +2,7 @@ package site.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import site.elements.DropList;
 
@@ -31,6 +32,9 @@ public class ProductPage extends BasePage {
                 By.cssSelector(BUY_NOW_FORM_CSS + PRODUCT_SIZE_SUGGESTIONS_CSS));
     }
 
+    @FindBy( css = ADD_TO_CART_BTN_CSS)
+    public WebElement addToCartBtn;
+
     @Override
     public void checkOpened(){
         driverWait.until(ExpectedConditions.
@@ -49,12 +53,15 @@ public class ProductPage extends BasePage {
         return driver.findElement(By.cssSelector(PRODUCT_BLOCK_CSS + PRODUCT_CAMPAIGN_PRICE_CSS));
     }
 
-    public void selectProductSize(String size)
+    public void selectProductSizeIfPresent(String size)
     {
-        sizeDropList.select(size);
+        if (sizeDropList.isPresent()) {
+            sizeDropList.select(size);
+            System.out.println("[AUT] Size + " + size + " selected.");
+        }
     }
 
     public void addProductToCart(){
-        getUniqueElement(driver, By.cssSelector(ADD_TO_CART_BTN_CSS)).click();
+        addToCartBtn.click();
     }
 }

@@ -12,7 +12,7 @@ public class UserTests extends WebInit {
     @Test // Task 11
     public void registerUserWithUSCountryTest() {
         mainPage.open();
-        mainPage.clickNewCustomersLink();
+        mainPage.newCustomersLink.click();
         User newUser = new User(Users.randomUserWithUS);
         createAccountPage.fillCreateAccountFormStarFields(newUser);
         mainPage.logout();
